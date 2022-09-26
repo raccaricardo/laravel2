@@ -11,7 +11,6 @@
 CREAR UN NUEVO
 
 <form action="{{url('/customers')}}" method='post'>
-    @method("POST")
     @csrf
 
     <div class="form-group">
@@ -21,9 +20,9 @@ CREAR UN NUEVO
     </div>
     <div class="form-group">
         <label for="surname">Apellido</label>
-        <input type="text" class="form-control" id="name" aria-describedby="surname" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="input_name" aria-describedby="surname" placeholder="Ingrese su apellido">
     </div>
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="select_state">Provincia</label>
         <select class="form-control" id="select_state">
           <option value='1'>1</option>
@@ -42,7 +41,7 @@ CREAR UN NUEVO
           <option>4</option>
           <option>5</option>
         </select>
-    </div>
+    </div> --}}
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">

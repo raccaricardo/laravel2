@@ -19,9 +19,7 @@
         @foreach($customers AS $item)
         <tr>
             <td>{{ $item->id}} </td>
-            <td>{{ $item->city}} </td>
-            <td>{{ $item->state}} </td>
-            <td>{{ $item->name}} </td>
+                <td>{{ $item->name}} </td>
             <td>{{ $item->surname}} </td>
             <td>{{ $item->email}} </td>
             <td></td>
