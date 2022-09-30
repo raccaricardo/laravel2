@@ -22,7 +22,6 @@ class CustomerController extends Controller
 
         return view('customers.index', ['customers' => $customers]);
 
-        // return view('customers.index', [json_decode($customers, true)-> $customers]);
     }
 
     /**
@@ -46,7 +45,7 @@ class CustomerController extends Controller
         //
         // dd($request->all());
         // error_log($request->all());
-        
+
         $customer = new Customer();
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
@@ -55,7 +54,7 @@ class CustomerController extends Controller
         // $customer-> city_id = $request-> input('city_id');
         $customer-> save();
         return back()->with('success', 'Cliente creado');
-        
+
     }
 
     /**
@@ -81,6 +80,8 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
+        $customer =  Customer :: find($id);
+        return view('customers.edit', ['customer' => $customer]);
     }
 
     /**

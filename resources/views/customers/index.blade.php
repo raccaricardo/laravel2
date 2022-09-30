@@ -10,7 +10,7 @@
         <div class="table-responsive">
 
             <table class='table captation-top'>
-                <captation>Listado de clientes:</captation>
+                <h2>Listado de clientes:</h2>
                 <thead class='table-dark'>
                     <tr>
                         <td scope='col'>Id</td>
@@ -47,7 +47,7 @@
 
         {{--
     CREAR UN NUEVO
-    
+
     <form action="{{url('/customers')}}" method='post'>
         @csrf
         <div class="form-group">
@@ -84,7 +84,7 @@
       <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Submit</button>
 </form> --}}
 

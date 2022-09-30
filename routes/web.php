@@ -29,6 +29,8 @@ Route::get
 // Route::get
 // ('customers/{id}/edit', [CustomerController::class, 'edit']);
 
+Route::put
+('customers/{id}', [CustomerController::class, 'update']);
 Route::delete
 ('customers/{id}', [CustomerController::class, 'destroy']);
 Route::post
