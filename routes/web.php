@@ -13,17 +13,22 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 
 Route::get
-('customers', [CustomerController::class, 'index']);
+('/', [CustomerController::class, 'index']);
 Route::get
 ('customers/create', [CustomerController::class, 'create']);
 Route::get
 ('customers/{id}', [CustomerController::class, 'show']);
+Route::get
+('customers/{id}/edit', [CustomerController::class, 'edit']);
+
+Route::delete
+('customers/{id}', [CustomerController::class, 'delete']);
 Route::post
 ('customers', [CustomerController::class, 'store']);
 

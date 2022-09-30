@@ -4,26 +4,29 @@
 
 
 <h1>Aqui va LISTADO scroll de CLIENTES </h1>
- <table>
+ <table class='table'>
     <thead>
         <tr>
-            <td>Id</td>
-            <td>City</td>
-            <td>State</td>
-            <td>Name</td>
-            <td>Surname</td>
-            <td>Email</td>
+            <td scope='col'>Id</td>
+            {{-- <td scope='col'>City</td>
+            <td scope='col'>State</td> --}}
+            <td scope='col'>Name</td>
+            <td scope='col'>Surname</td>
+            <td scope='col'>Email</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         @foreach($customers AS $item)
         <tr>
-            <td>{{ $item->id}} </td>
+            <td scope='row'>{{ $item->id}} </td>
                 <td>{{ $item->name}} </td>
             <td>{{ $item->surname}} </td>
             <td>{{ $item->email}} </td>
-            <td></td>
-            <td></td>
+            <td>
+                <a href="/customers/{{ $item->id}}" class='btn btn-primary'>Editar</a>
+                <a href="/customers/{{ $item->id}}" class='btn btn-danger'>Borrar</a>
+            </td>
         </tr>
         @endforeach
     </tbody>
@@ -31,7 +34,7 @@
 
 
 
-
+{{--
 CREAR UN NUEVO
 
 <form action="{{url('/customers')}}" method='post'>
@@ -72,6 +75,6 @@ CREAR UN NUEVO
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </form> --}}
 
 @endsection
