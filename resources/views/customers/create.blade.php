@@ -15,12 +15,12 @@ CREAR UN NUEVO
 
     <div class="form-group">
         <label for="input_name">Nombre</label>
-        <input type="text" class="form-control" id="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
+        <input type="text" class="form-control" id="input_name" name="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
         <small id="name" class="form-text text-muted">We'll never share your information with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="surname">Apellido</label>
-        <input type="text" class="form-control" id="input_name" aria-describedby="surname" placeholder="Ingrese su apellido">
+        <input type="text" class="form-control" id="input_surname" name="input_surname" aria-describedby="surname" placeholder="Ingrese su apellido">
     </div>
     {{-- <div class="form-group">
         <label for="select_state">Provincia</label>
@@ -44,7 +44,7 @@ CREAR UN NUEVO
     </div> --}}
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
+      <input type="email" class="form-control" id="input_email" name="input_email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 

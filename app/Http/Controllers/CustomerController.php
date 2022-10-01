@@ -43,14 +43,15 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
-        // print_r($request->all());
+        // dd($request->all());
+        // error_log($request->all());
+        
         $customer = new Customer();
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
         $customer-> email = $request -> input('input_email');
         // $customer-> state_id = $request-> input('state_id');
         // $customer-> city_id = $request-> input('city_id');
-        print_r($customer);
         $customer-> save();
     }
 
