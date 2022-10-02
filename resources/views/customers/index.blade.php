@@ -31,7 +31,7 @@
                 <td>{{ $item->email}} </td>
                 <td>
                     <a href="/customers/{{$item->id}}" class='btn btn-primary'>Editar</a>
-                    <form action="{{url('/customers/'.$item->id)}}">
+                    <form action="{{url('/customers/'.$item->id)}}" method='post'>
                         @csrf
                         @method('DELETE')
                         <button type='submit' class='btn btn-danger'>Borrar</a>
