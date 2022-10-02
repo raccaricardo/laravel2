@@ -4,15 +4,16 @@
 
 <div class="container-fluid">
 
-    <h1>Aqui va LISTADO scroll de CLIENTES </h1>
+    <h1>LISTADO scroll de CLIENTES </h1>
     <a href="/customers/create" class='btn btn-primary'>Anadir nuevo cliente</a>
     <div class="table-responsive">
 
-        <table class='table captation-top min-vh-100'>
+        <table class='table captation-top'>
             <captation>Listado de clientes:</captation>
             <thead class='table-dark'>
             <tr>
             <td scope='col'>Id</td>
+            
             {{-- <td scope='col'>City</td>
                 <td scope='col'>State</td> --}}
             <td scope='col'>Nombre</td>
@@ -29,8 +30,12 @@
                 <td>{{ $item->surname}} </td>
                 <td>{{ $item->email}} </td>
                 <td>
-                    <a href="/customers/{{ $item->id}}" class='btn btn-primary'>Editar</a>
-                    <a href="/customers/{{ $item->id}}" class='btn btn-danger'>Borrar</a>
+                    <a href="/customers/{{$item->id}}" class='btn btn-primary'>Editar</a>
+                    <form action="{{url('/customers/'.$item->id)}}">
+                        @csrf
+                        @method('DELETE')
+                        <button type='submit' class='btn btn-danger'>Borrar</a>
+                    </form>
             </td>
         </tr>
         @endforeach

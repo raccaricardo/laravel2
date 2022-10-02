@@ -26,11 +26,13 @@ Route::get
 ('customers/create', [CustomerController::class, 'create']);
 Route::get
 ('customers/{id}', [CustomerController::class, 'show']);
-Route::get
-('customers/{id}/edit', [CustomerController::class, 'edit']);
+// Route::get
+// ('customers/{id}/edit', [CustomerController::class, 'edit']);
 
 Route::delete
-('customers/{id}', [CustomerController::class, 'delete']);
+('customers/{id}', [CustomerController::class, 'destroy']);
 Route::post
 ('customers', [CustomerController::class, 'store']);
+Route::put
+('customers/{id}', [CustomerController::class, 'update']);
 

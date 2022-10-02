@@ -15,6 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
+        // Debugbar::info('en el index method');
+
         $customers = Customer::all();
         // $customers = DB::select('select * from customers');
 
@@ -64,7 +66,9 @@ class CustomerController extends Controller
     public function show($id)
     {
         //
-        return view('customers.customerDetail', [ 'customer_id'  => $id]);
+        $customer = Customer::find($id);
+
+        return view('customers.customerDetail', [ 'customer'  => $customer]);
     }
 
     /**
@@ -88,6 +92,17 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+         // dd($request->all());
+        // error_log($request->all());
+        // dd($id);
+        $customer = Customer::find($id);
+        $customer-> name = $request -> input('input_name');
+        $customer-> surname = $request -> input('input_surname');
+        $customer-> email = $request -> input('input_email');
+        // $customer-> state_id = $request-> input('state_id');
+        // $customer-> city_id = $request-> input('city_id');
+        $customer-> save();
+        return "Guardado";
     }
 
     /**
@@ -99,5 +114,9 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+        // Debugbar::info('Llamado a destroy'.$id);
+        $customer = Customer::destroy($id);
+        // Debugbar::info($customer);
+        return 'Cliente borrad';
     }
 }
