@@ -14,12 +14,10 @@
                 <thead class='table-dark'>
                     <tr>
                         <td scope='col'>Id</td>
-
-                        {{-- <td scope='col'>City</td>
-                <td scope='col'>State</td> --}}
                         <td scope='col'>Nombre</td>
                         <td scope='col'>Apellido</td>
                         <td scope='col'>Email</td>
+                        <td scope='col'>City</td>
                         <td></td>
                     </tr>
                 </thead>
@@ -30,9 +28,11 @@
                             <td>{{ $item->name }} </td>
                             <td>{{ $item->surname }} </td>
                             <td>{{ $item->email }} </td>
+                            <td>{{ $item->cities->name }} </td>
+
                             <td>
                                 <a href="/customers/{{$item->id}}" class='btn btn-primary'>Editar</a>
-                                <form action="{{ url('/customers/' . $item->id) }}" method='post'>
+                                <form action="{{ url('/customers/'.$item->id) }}" method='post'>
                                     @csrf
                                     @method('DELETE')
                                     <button type='submit' class='btn btn-danger'>Borrar</a>

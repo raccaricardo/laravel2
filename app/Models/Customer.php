@@ -10,4 +10,8 @@ class Customer extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public function cities(){
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
 }

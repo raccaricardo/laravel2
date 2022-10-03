@@ -17,8 +17,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
+
         $customers = Customer::all();
-        return view('customers.index', ['customers' => $customers]);
+
+        return view('customers.index', ['customers' => $customers ]);
     }
 
     /**
@@ -47,7 +49,7 @@ class CustomerController extends Controller
         $customer-> email = $request -> input('input_email');
         $customer-> city_id = $request-> input('select_city_id');
         $customer-> save();
-        return back()->with('success', 'Cliente guardado');
+        return redirect()->action([CustomerController::class, 'index']);
     }
 
     /**
@@ -61,7 +63,7 @@ class CustomerController extends Controller
         //
         $customer = Customer::find($id);
 
-        return view('customers.customerDetail', ['customer' => Customer :: find($id), 'cities' => City::All()]);
+        return view('customers.show', ['customer' => Customer :: find($id), 'cities' => City::All()]);
 
     }
 
@@ -89,13 +91,10 @@ class CustomerController extends Controller
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
         $customer-> email = $request -> input('input_email');
-        // $customer-> state_id = $request-> input('state_id');
-        // $customer-> city_id = $request-> input('city_id');
+        $customer-> city_id = $request-> input('select_city_id');
         $customer-> save();
 
-        return Redirect()->action([CustomerController::class, 'index']);
-
-
+        return Redirect()->action([CustomerController::class, 'show'], ['id'=> $id]);
     }
 
     /**

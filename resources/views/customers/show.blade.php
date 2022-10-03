@@ -26,10 +26,8 @@
             @foreach ($cities as $city)
                 @if ($city-> id == $customer-> city_id){
                     <option value="{{$city->id}}" selected="selected"> {{$city->name}}</option>
-
-                }else{
+                }@else{
                     <option value="{{$city->id}}"> {{$city->name}}</option>
-
                 }
                 @endif
             @endforeach

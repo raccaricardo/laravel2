@@ -15,8 +15,13 @@ CREAR UN NUEVO
 
     <div class="form-group">
         <label for="input_name">Nombre</label>
-        <input type="text" class="form-control" id="input_name" name="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
+        <input type="text" class="form-control @error('input_name') is-invalid @enderror" id="input_name" name="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
         <small id="name" class="form-text text-muted">We'll never share your information with anyone else.</small>
+        @error('input_name')
+            <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please choose a username.
+          </div>
+        @enderror
     </div>
     <div class="form-group">
         <label for="surname">Apellido</label>
