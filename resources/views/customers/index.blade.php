@@ -2,50 +2,50 @@
 @section('title', 'Index clientes')
 @section('content')
 
-<div class="container-fluid">
 
-    <h1>LISTADO scroll de CLIENTES </h1>
-    <a href="/customers/create" class='btn btn-primary'>Anadir nuevo cliente</a>
-    <div class="table-responsive">
+    <div class="container-fluid">
 
-        <table class='table captation-top'>
-            <captation>Listado de clientes:</captation>
-            <thead class='table-dark'>
-            <tr>
-            <td scope='col'>Id</td>
-            
-            {{-- <td scope='col'>City</td>
+        <h1>LISTADO scroll de CLIENTES </h1>
+        <a href="/customers/create" class='btn btn-primary'>Anadir nuevo cliente</a>
+        <div class="table-responsive">
+
+            <table class='table captation-top'>
+                <captation>Listado de clientes:</captation>
+                <thead class='table-dark'>
+                    <tr>
+                        <td scope='col'>Id</td>
+
+                        {{-- <td scope='col'>City</td>
                 <td scope='col'>State</td> --}}
-            <td scope='col'>Nombre</td>
-            <td scope='col'>Apellido</td>
-            <td scope='col'>Email</td>
-            <td></td>
-            </tr>
-    </thead>
-    <tbody>
-        @foreach($customers AS $item)
-        <tr>
-            <td scope='row'>{{ $item->id}} </td>
-                <td>{{ $item->name}} </td>
-                <td>{{ $item->surname}} </td>
-                <td>{{ $item->email}} </td>
-                <td>
-                    <a href="/customers/{{$item->id}}" class='btn btn-primary'>Editar</a>
-                    <form action="{{url('/customers/'.$item->id)}}" method='post'>
-                        @csrf
-                        @method('DELETE')
-                        <button type='submit' class='btn btn-danger'>Borrar</a>
-                    </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-</div>
+                        <td scope='col'>Nombre</td>
+                        <td scope='col'>Apellido</td>
+                        <td scope='col'>Email</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($customers as $item)
+                        <tr>
+                            <td scope='row'>{{ $item->id }} </td>
+                            <td>{{ $item->name }} </td>
+                            <td>{{ $item->surname }} </td>
+                            <td>{{ $item->email }} </td>
+                            <td>
+                                <a href="/customers/{{ $item->id }}" class='btn btn-primary'>Editar</a>
+                                <form action="{{ url('/customers/' . $item->id) }}" method='post'>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type='submit' class='btn btn-danger'>Borrar</a>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
 
-
-{{--
+        {{--
     CREAR UN NUEVO
     
     <form action="{{url('/customers')}}" method='post'>
@@ -88,6 +88,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form> --}}
 
-</div>
+    </div>
 
 @endsection

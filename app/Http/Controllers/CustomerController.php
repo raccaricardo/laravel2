@@ -32,7 +32,6 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
         return view('customers.create');
     }
 
@@ -55,6 +54,8 @@ class CustomerController extends Controller
         // $customer-> state_id = $request-> input('state_id');
         // $customer-> city_id = $request-> input('city_id');
         $customer-> save();
+        return back()->with('success', 'Cliente creado');
+        
     }
 
     /**
@@ -102,7 +103,8 @@ class CustomerController extends Controller
         // $customer-> state_id = $request-> input('state_id');
         // $customer-> city_id = $request-> input('city_id');
         $customer-> save();
-        return "Guardado";
+        return back()->with('success', 'Cliente guardado');
+
     }
 
     /**
@@ -113,10 +115,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // Debugbar::info('Llamado a destroy'.$id);
         $customer = Customer::destroy($id);
-        // Debugbar::info($customer);
-        return 'Cliente borrad';
+        return back()->with('success', 'Cliente eliminado');
+
     }
 }
