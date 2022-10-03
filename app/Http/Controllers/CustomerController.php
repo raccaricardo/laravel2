@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\City;
 use Illuminate\Http\Request;
+
+use App\Models\Customer;
+
 
 class CustomerController extends Controller
 {
@@ -14,14 +17,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
-        // Debugbar::info('en el index method');
-
         $customers = Customer::all();
-        // $customers = DB::select('select * from customers');
-
         return view('customers.index', ['customers' => $customers]);
-
     }
 
     /**
@@ -31,7 +28,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers.create');
+        $cities = City::all();
+
+        return view('customers.create', [ 'cities' => $cities]);
     }
 
     /**
@@ -42,19 +41,13 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd($request->all());
-        // error_log($request->all());
-
         $customer = new Customer();
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
         $customer-> email = $request -> input('input_email');
-        // $customer-> state_id = $request-> input('state_id');
-        // $customer-> city_id = $request-> input('city_id');
+        $customer-> city_id = $request-> input('select_city_id');
         $customer-> save();
-        return back()->with('success', 'Cliente creado');
-
+        return back()->with('success', 'Cliente guardado');
     }
 
     /**
@@ -68,7 +61,8 @@ class CustomerController extends Controller
         //
         $customer = Customer::find($id);
 
-        return view('customers.customerDetail', [ 'customer'  => $customer]);
+        return view('customers.customerDetail', ['customer' => Customer :: find($id), 'cities' => City::All()]);
+
     }
 
     /**
@@ -77,12 +71,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-        $customer =  Customer :: find($id);
-        return view('customers.edit', ['customer' => $customer]);
-    }
+    // public function edit($id)
+    // {
+    //     return view('customers.edit', ['customer' => Customer :: find($id), 'cities' => City::All()]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -93,10 +85,6 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-         // dd($request->all());
-        // error_log($request->all());
-        // dd($id);
         $customer = Customer::find($id);
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
@@ -104,7 +92,9 @@ class CustomerController extends Controller
         // $customer-> state_id = $request-> input('state_id');
         // $customer-> city_id = $request-> input('city_id');
         $customer-> save();
-        return back()->with('success', 'Cliente guardado');
+
+        return Redirect()->action([CustomerController::class, 'index']);
+
 
     }
 

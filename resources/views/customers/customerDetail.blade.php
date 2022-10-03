@@ -19,26 +19,23 @@
         <label for="surname">Apellido</label>
         <input type="text" class="form-control" id="input_surname" name="input_surname" value="{{$customer->surname}}" disabled aria-describedby="surname" placeholder="Ingrese su apellido">
     </div>
-    {{-- <div class="form-group">
-        <label for="select_state">Provincia</label>
-        <select class="form-control" id="select_state">
-          <option value='1'>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+    <div class="form-group">
+        <label for="select_city_id">Ciudad</label>
+        <select class="form-control" id="select_city_id" name='select_city_id' disabled>
+            <option value="0">Seleccione una ciudad</option>
+            @foreach ($cities as $city)
+                @if ($city-> id == $customer-> city_id){
+                    <option value="{{$city->id}}" selected="selected"> {{$city->name}}</option>
+
+                }else{
+                    <option value="{{$city->id}}"> {{$city->name}}</option>
+
+                }
+                @endif
+            @endforeach
+
         </select>
     </div>
-    <div class="form-group">
-        <label for="select_city">Ciudad</label>
-        <select class="form-control" id="select_city">
-          <option value='1'>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-    </div> --}}
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="input_email" name="input_email" disabled value="{{$customer->email}}" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
