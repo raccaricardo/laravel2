@@ -13,12 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
+        Schema::create('providers', function (Blueprint $table) {
+            $table-> charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('name');
             $table->timestamps();
+            $table->string('name', 50)-> required();
+            $table->string('business_name', 100);
+            $table->string('address', 100);
+            $table->string('cp', 100);
+            $table->string('email', 100);
+            $table->string('website', 100);
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('providers');
     }
 };
