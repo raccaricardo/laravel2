@@ -24,6 +24,18 @@
                   </form>
                 </li>
             </ul>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ $customers[0]->email }}</li>
+                <li class="list-group-item">{{ $customers[0]->cities->name }}</li>
+                <li  class='d-flex align-items-center justify-content-center'>
+                  <a href="/customers/{{ $customers[0]->id }}" class='btn btn-primary mb-1 me-2 '>Editar</a>
+                  <form action="{{ url('/customers/' . $customers[0]->id) }}" method='post'>
+                      @csrf
+                      @method('DELETE')
+                      <button type='submit' class='btn btn-danger '>Borrar</a>
+                  </form>
+                </li>
+            </ul>
         </div>
     </div>
 
