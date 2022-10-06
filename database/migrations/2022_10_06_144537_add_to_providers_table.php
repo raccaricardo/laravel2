@@ -16,11 +16,14 @@ return new class extends Migration
                 ->constrained('cities')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            });
+            $table->after('id', function($table){
                 $table->foreignId('fiscal_condition_id')
                 ->constrained('iva')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             });
+
         });
     }
 
