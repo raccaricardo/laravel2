@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
+            $table-> string('name', 50) -> required()-> change();
+            $table-> string('surname', 50) -> required()-> change();
             $table-> string('email', 30)-> unique()-> change();
-            $table-> string('name', 50) -> change();
-            $table-> string('name', 50) -> unique()-> change();
+
             $table-> after('id', function ($table) {
                 $table-> foreignId('city_id')
                 ->constrained('cities')
