@@ -51,7 +51,10 @@ class CustomerController extends Controller
         $customer-> save();
         return redirect()->action([CustomerController::class, 'index']);
     }
+    public function list(){
+        return view('customers.list', ['customers'=> Customer::all()]);
 
+    }
     /**
      * Display the specified resource.
      *
@@ -66,18 +69,6 @@ class CustomerController extends Controller
         return view('customers.show', ['customer' => Customer :: find($id), 'cities' => City::All()]);
 
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit($id)
-    // {
-    //     return view('customers.edit', ['customer' => Customer :: find($id), 'cities' => City::All()]);
-    // }
-
     /**
      * Update the specified resource in storage.
      *

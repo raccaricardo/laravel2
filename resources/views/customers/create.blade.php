@@ -2,12 +2,6 @@
 @section('title', 'Agregar cliente')
 @section('content')
 
-
-
-
-
-
-
 CREAR UN NUEVO
 
 <form action="{{url('/customers')}}" method='post'>
@@ -15,7 +9,7 @@ CREAR UN NUEVO
 
     <div class="form-group">
         <label for="input_name">Nombre</label>
-        <input type="text" class="form-control @error('input_name') is-invalid @enderror" id="input_name" name="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
+        <input autofocus type="text" class="form-control @error('input_name') is-invalid @enderror" id="input_name" name="input_name" aria-describedby="name" placeholder="Ingrese su nombre">
         <small id="name" class="form-text text-muted">We'll never share your information with anyone else.</small>
         @error('input_name')
             <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -29,14 +23,34 @@ CREAR UN NUEVO
     </div>
 
     <div class="form-group">
-        <label for="select_city_id">Ciudad</label>
-        <select class="form-control" id="select_city_id" name='select_city_id'>
-            <option value="0" selected="selected">Seleccione una ciudad</option>
-            @foreach ($cities as $city)
-                <option value="{{$city->id}}">{{$city->name}}</option>
-            @endforeach
+      <div class="row">
+        
+            <label for="input_city_id">Ciudad</label>
+            <input list='cities' id="input_city_id" name='input_city_id'>
+                <datalist id="cities">
+                @foreach ($cities as $city)
+                    <option value="{{$city->name}}">
+                @endforeach
+                </datalist>
+            </input>
+        
+        
+          <button class="btn btn-primary pt-2">Agregar una nueva ciudad</button>
+        
+      </div>
+    </div>
+    <div class="form-group"
+      <label for="ice-cream-choice">Choose a flavor:</label>
+      <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice">
 
-        </select>
+      <datalist id="ice-cream-flavors">
+          <option value="Chocolate">
+          <option value="Coconut">
+          <option value="Mint">
+          <option value="Strawberry">
+          <option value="Vanilla">
+      </datalist>
+
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>

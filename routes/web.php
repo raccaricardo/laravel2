@@ -21,7 +21,7 @@ use App\Http\Controllers\CustomerController;
 Route::get
 ('/', [CustomerController::class, 'index']);
 Route::get
-('customers', [CustomerController::class, 'index']);
+('customers', [CustomerController::class, 'list']);
 Route::get
 ('customers/create', [CustomerController::class, 'create']);
 Route::get
