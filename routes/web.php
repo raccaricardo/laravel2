@@ -17,24 +17,23 @@ use App\Http\Controllers\CustomerController;
 //     return view('index');
 // });
 
+Route::pattern('id', '[0-9]+');
 
-Route::get
-('/', [CustomerController::class, 'index']);
-Route::get
-('customers', [CustomerController::class, 'list']);
-Route::get
-('customers/create', [CustomerController::class, 'create']);
-Route::get
-('customers/{id}', [CustomerController::class, 'show']);
+Route::controller(CustomerController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('customers/create','create');
+    Route::get('customers','list');
+    Route::get('customers/{id}','show');
+    //methos forms
+    Route::put('customers/{id}', 'update');
+    Route::delete('customers/{id}', 'destroy');
+    Route::post('customers', 'store'); 
+});
 // Route::get
 // ('customers/{id}/edit', [CustomerController::class, 'edit']);
 
-Route::put
-('customers/{id}', [CustomerController::class, 'update']);
-Route::delete
-('customers/{id}', [CustomerController::class, 'destroy']);
-Route::post
-('customers', [CustomerController::class, 'store']);
-Route::put
-('customers/{id}', [CustomerController::class, 'update']);
 
+// Route::get('/{db_table}/{search}', function ($db_table, $search) {
+    
+//     return $search; 
+// })->where(array( 'search'=> '.*', 'db_table' =>['customers', 'cities', 'providers']));

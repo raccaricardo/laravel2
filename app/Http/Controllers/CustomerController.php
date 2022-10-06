@@ -47,7 +47,9 @@ class CustomerController extends Controller
         $customer-> name = $request -> input('input_name');
         $customer-> surname = $request -> input('input_surname');
         $customer-> email = $request -> input('input_email');
-        $customer-> city_id = $request-> input('select_city_id');
+        $customer-> address = $request -> input('input_address');
+        $customer-> phone = $request -> input('input_phone');
+        $customer-> city_id = $request-> input('input_city_id');
         $customer-> save();
         return redirect()->action([CustomerController::class, 'index']);
     }
