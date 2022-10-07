@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\IvaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,11 +14,6 @@ use App\Http\Controllers\CustomerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('index');
-// });
-
 Route::pattern('id', '[0-9]+');
 
 Route::controller(CustomerController::class)->group(function () {
@@ -29,9 +26,15 @@ Route::controller(CustomerController::class)->group(function () {
     Route::delete('customers/{id}', 'destroy');
     Route::post('customers', 'store'); 
 });
-// Route::get
-// ('customers/{id}/edit', [CustomerController::class, 'edit']);
-
+Route::controller(IvaController::class)-> group(function (){
+    Route::get('ivas', 'index')->name('iva/index');
+    Route::get('ivas/create', 'create')->name('iva/create');
+    Route::get('ivas/{id}', 'show')->name('iva/show');
+    //methos forms
+    Route::put('ivas/{id}', 'update');
+    Route::delete('ivas/{id}', 'destroy');
+    Route::post('ivas', 'store'); 
+});
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
     
