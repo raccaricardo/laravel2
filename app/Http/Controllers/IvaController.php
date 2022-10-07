@@ -7,76 +7,47 @@ use Illuminate\Http\Request;
 
 class IvaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('iva.index');        
+        $message= null ;
+        return view('iva.index', ['ivas' => Iva::all()]);
     }
 
     public function create()
     {
         return view('iva.create');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $iva = new Iva();
-        $iva -> name = $request -> input('input_name');
-        $iva -> save(); 
-        return to_route('iva/show', ['id' => $iva -> id]);
+        $iva->name = $request->input('input_name');
+        $iva->save();
+        return to_route('iva/show', ['id' => $iva->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return view('iva.show', ['iva' => Iva::find($id)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('iva.show', ['iva' => Iva::find($id)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $iva = Iva::find($id);
+        $iva->name = $request->input('input_name');
+        $iva->save();
+        return view('iva.show', ['iva'=> $iva]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $iva = Iva::destroy($id);
+        return back()->with('success', 'Cliente eliminado');
     }
 }

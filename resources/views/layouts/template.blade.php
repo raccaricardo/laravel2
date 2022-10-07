@@ -43,7 +43,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{url('/')}}">Inicio</a>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,7 +71,19 @@
                                 <li><a class="dropdown-item" href="{{url('/cities/create')}}">Agregar nueva ciudad</a></li>
                             </ul>
                         </li>
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                IVA
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{url('/ivas')}}">Listado</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{url('/ivas/create')}}">Agregar nuevo IVA</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

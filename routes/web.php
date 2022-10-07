@@ -23,8 +23,8 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('customers/{id}','show');
     //methos forms
     Route::put('customers/{id}', 'update');
+    Route::post('customers', 'store');
     Route::delete('customers/{id}', 'destroy');
-    Route::post('customers', 'store'); 
 });
 Route::controller(IvaController::class)-> group(function (){
     Route::get('ivas', 'index')->name('iva/index');
@@ -32,11 +32,11 @@ Route::controller(IvaController::class)-> group(function (){
     Route::get('ivas/{id}', 'show')->name('iva/show');
     //methos forms
     Route::put('ivas/{id}', 'update');
+    Route::post('ivas', 'store');
     Route::delete('ivas/{id}', 'destroy');
-    Route::post('ivas', 'store'); 
 });
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
-    
-//     return $search; 
+
+//     return $search;
 // })->where(array( 'search'=> '.*', 'db_table' =>['customers', 'cities', 'providers']));
