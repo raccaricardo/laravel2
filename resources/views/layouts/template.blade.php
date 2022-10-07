@@ -74,14 +74,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                IVA
+                                Proveedores
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{url('/ivas')}}">Listado</a></li>
+                                <li><a class="dropdown-item" href="{{url('/providers')}}">Listado</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="{{url('/ivas/create')}}">Agregar nuevo IVA</a></li>
+                                <li><a class="dropdown-item" href="{{url('/providers/create')}}">Agregar nuevo Proveedor</a></li>
                             </ul>
                         </li>
                     </ul>
