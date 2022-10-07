@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\IvaController;
+use App\Http\Controllers\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('customers/create','create');
     Route::get('customers','list');
     Route::get('customers/{id}','show');
-    //methos forms
+    //methods forms
     Route::put('customers/{id}', 'update');
     Route::post('customers', 'store');
     Route::delete('customers/{id}', 'destroy');
@@ -30,11 +31,23 @@ Route::controller(IvaController::class)-> group(function (){
     Route::get('ivas', 'index')->name('iva/index');
     Route::get('ivas/create', 'create')->name('iva/create');
     Route::get('ivas/{id}', 'show')->name('iva/show');
-    //methos forms
+    //methods forms
     Route::put('ivas/{id}', 'update');
     Route::post('ivas', 'store');
     Route::delete('ivas/{id}', 'destroy');
 });
+Route:: controller(ProviderController::class)-> group(function(){
+    Route::get('providers', 'index')->name('providers');
+    Route::get('providers/create', 'create')->name('providers/create');
+    Route::get('providers/{id}/edit', 'edit');
+    Route::get('providers/{id}', 'show')->name('providers/{id}');
+
+    //methods forms
+    Route:: put('providers', 'edit');
+    Route::post('providers', 'store');
+    Route::delete('providers', 'delete');
+});
+
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
 
