@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class='mt-5'>
-        CREAR UN NUEVO PROVEEDOR
+        GUARDAR UN NUEVO PROVEEDOR
     </h1>
 
     <form action="{{ url('/providers') }}" method='post'>
