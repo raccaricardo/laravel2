@@ -68,7 +68,7 @@ class CustomerController extends Controller
         //
         $customer = Customer::find($id);
 
-        return view('customers.show', ['customer' => Customer :: find($id), 'cities' => City::All()]);
+        return view('customers.show', ['customer' => $customer, 'cities' => City::All()]);
 
     }
     /**

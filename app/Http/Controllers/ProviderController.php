@@ -6,6 +6,8 @@ use App\Models\City;
 use App\Models\Iva;
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
+
 
 class ProviderController extends Controller
 {
@@ -24,6 +26,14 @@ class ProviderController extends Controller
 
     public function store(Request $request)
     {
+        $validations = $request -> validate([
+            'name' => 'unique | max: 50',
+            'bussiness_name' => 'required | unique | max: 100',
+            'input_address' => 'required | max: 100',
+            'input_email' => 'required | max: 100',
+            'input_website' => 'required | max: 100 | regex: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
+        ]);
+
         $provider = new Provider();
         $provider -> name = $request -> input('input_name');
         $provider -> business_name = $request -> input('input_business_name');
