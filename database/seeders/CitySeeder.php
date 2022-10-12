@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+
 class CitySeeder extends Seeder
 {
     /**
@@ -15,8 +16,11 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cities')->insert([ 'name' => 'Villa maria']);
-        DB::table('cities')->insert([ 'name' => 'Villa nueva']);
-        DB::table('cities')->insert([ 'name' => 'Hernando']);
+        DB::table('cities')->insert([
+
+            ['name' => 'Villa maria'],
+            ['name' => 'Villa nueva'],
+            ['name' => 'Hernando']
+        ]);
     }
 }
