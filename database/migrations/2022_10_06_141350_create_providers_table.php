@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('name', 50)-> required();
             $table->string('business_name', 100);
             $table->string('address', 100);
-            $table->string('cp', 100);
             $table->string('email', 100);
             $table->string('website', 100);
             $table->softDeletes();
