@@ -44,7 +44,7 @@ Route:: controller(ProviderController::class)-> group(function(){
 
     //methods forms
     Route:: put('providers', 'edit');
-    Route::post('providers', 'store');
+    Route::post('providers', 'store')->name('proveedores.store');
     Route::delete('providers', 'delete');
 });
 

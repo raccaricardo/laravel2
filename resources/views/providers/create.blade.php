@@ -18,7 +18,7 @@
     @endif
 
 
-    <form action="{{ url('/providers') }}" method='post'>
+    <form action="{{ route('proveedores.store') }}" method='post'>
         @csrf
         <div class="form-group mt-5">
             <label for="input_name">Nombre</label>
