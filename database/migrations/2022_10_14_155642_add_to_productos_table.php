@@ -11,34 +11,34 @@ return new class extends Migration
     {
         Schema::table('productos', function (Blueprint $table) {
             $table->after('id', function ($table) {
-                $table->foreignId('subcategoria')
-                    ->constrained('subcategorias')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            });
+                    $table->foreignId('fabricante')
+                        ->constrained('fabricantes')
+                        ->onUpdate('cascade')
+                        ->onDelete('cascade');
+                });
             $table->after('id', function ($table) {
                 $table->foreignId('proveedor')
-                    ->constrained('proveedores')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                ->constrained('proveedores')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             });
-            $table->after('id', function ($table) {
-                $table->foreignId('fabricante')
-                    ->constrained('fabricantes')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            });
+                $table->after('id', function ($table) {
+                    $table->foreignId('subcategoria')
+                        ->constrained('subcategorias')
+                        ->onUpdate('cascade')
+                        ->onDelete('cascade');
+                });
         });
     }
 
     public function down()
     {
         Schema::table('productos', function (Blueprint $table) {
-            $table->dropForeign('clientes_subcategoria_foreign');
+            $table->dropForeign('productos_subcategoria_foreign');
             $table->dropColumn('subcategoria');
-            $table->dropForeign('clientes_proveedor_foreign');
+            $table->dropForeign('productos_proveedor_foreign');
             $table->dropColumn('proveedor');
-            $table->dropForeign('clientes_fabricante_foreign');
+            $table->dropForeign('productos_fabricante_foreign');
             $table->dropColumn('fabricante');
         });
     }

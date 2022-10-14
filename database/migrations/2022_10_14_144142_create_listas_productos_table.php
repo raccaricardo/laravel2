@@ -12,12 +12,9 @@ return new class extends Migration
         Schema::create('listas_productos', function (Blueprint $table) {
             $table->bigInteger('lista');
             $table->bigInteger('producto');
-            $table->primary('lista','producto');
-
             $table->decimal('porcentaje', 10, 2);
-
-
             $table->timestamps();
+            $table->primary('lista', 'producto');
         });
     }
 
