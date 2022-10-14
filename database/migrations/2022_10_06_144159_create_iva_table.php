@@ -6,20 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('iva', function (Blueprint $table) {
             $table-> charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->string('name', 100)->required();
+            $table->string('nombre', 150)->unique();
+            $table->string('imagen')->nullable()->default('text');
             $table->timestamps();
-            $table->softDeletes();
+    
         });
     }
 

@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table-> charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('surname', 100);
-            $table->string('address', 100);
-            $table->string('email', 100);
-            $table->string('phone', 100);
+            $table->string('nombre', 100)->unique();
+            $table->mediumText('descripcion')->nullable();
+            $table->string('imagen')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_customers');
+        Schema::dropIfExists('categorias');
     }
 };
