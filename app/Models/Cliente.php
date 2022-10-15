@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Customer extends Model
+class Cliente extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    public function cities(){
-        return $this->belongsTo(City::class, 'city_id');
+    public function localidades(){
+        return $this->belongsTo(Localidad::class, 'localidad');
     }
 
 }
