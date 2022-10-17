@@ -50,6 +50,8 @@ Route:: controller(ProviderController::class)-> group(function(){
 });
 Route::controller(FabricanteController::class)->group(function () {
     Route::get('/fabricantes', 'index');
+    Route::get('/fabricantes/create', 'create');
+
     Route::get('/fabricantes/{id}', 'show');
 
     Route::post('/fabricantes', 'store');
