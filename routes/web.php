@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FabricanteController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ProviderController;
 
@@ -47,7 +48,12 @@ Route:: controller(ProviderController::class)-> group(function(){
     Route::post('providers', 'store')->name('proveedores.store');
     Route::delete('providers', 'delete');
 });
+Route::controller(FabricanteController::class)->group(function () {
+    Route::get('/fabricantes', 'index');
+    Route::get('/fabricantes/{id}', 'show');
 
+    Route::post('/fabricantes', 'store');
+});
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
 
