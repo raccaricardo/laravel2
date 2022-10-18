@@ -2,43 +2,42 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\IvaController;
+use App\Http\Controllers\FabricanteController;
 use App\Http\Controllers\ProveedorController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+ 
 Route::pattern('id', '[0-9]+');
 
 Route::controller(ClienteController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('clientes/create','create');
-    Route::get('clientes','list');
-    Route::get('clientes/{id}','show');
-    //methods forms
-    Route::put('clientes/{id}', 'update');
-    Route::post('clientes', 'store');
-    Route::delete('clientes/{id}', 'destroy');
+    Route::get('/', 'index')->name('clientes.index');
+    Route::get('clientes/create','create')->name('clientes.create');
+    Route::get('clientes','list')->name('clientes.list'); //ruta de prueba de disenos
+    Route::get('clientes/{id}','show')->name('clientes.show');
+    //methods form->name(''clientes.')s
+    Route::put('clientes/{id}', 'update')->name('clientes.update');
+    Route::post('clientes', 'store')->name('clientes.store');
+    Route::delete('clientes/{id}', 'destroy')->name('clientes.destroy');
 });
 Route:: controller(ProveedorController::class)-> group(function(){
-    Route::get('proveedores', 'index')->name('proveedores');
-    Route::get('proveedores/create', 'create')->name('proveedores/create');
-    Route::get('proveedores/{id}/edit', 'edit');
-    Route::get('proveedores/{id}', 'show')->name('proveedores/{id}');
+    Route::get('proveedores', 'index')->name('proveedores.index');
+    Route::get('proveedores/create', 'create')->name('proveedores.create');
+    Route::get('proveedores/{id}/edit', 'edit')->name('proveedores.edit');
+    Route::get('proveedores/{id}', 'show')->name('proveedores.show');
 
     //methods forms
-    Route:: put('proveedores', 'edit');
+    Route:: put('proveedores', 'edit')->name('proveedores.edit');
     Route::post('proveedores', 'store')->name('proveedores.store');
-    Route::delete('proveedores', 'delete');
+    Route::delete('proveedores', 'delete')->name('proveedores.delete');
 });
-
+Route::controller(FabricanteController::class)->group(function () {
+    Route::get('/fabricantes', 'index')->name('fabricantes.index');
+    Route::get('/fabricantes/create', 'create')->name('fabricantes.create');
+    Route::get('/fabricantes/{id}', 'show')->name('fabricantes.show');
+    Route::post('/fabricantes', 'store')->name('fabricantes.store');
+        //methods forms
+        Route::post('fabricantes', 'store')->name('fabricantes.store');
+        Route:: put('fabricantes', 'edit')->name('fabricantes.edit');
+        Route::delete('fabricantes', 'delete')->name('fabricantes.delete');
+});
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
 

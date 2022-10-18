@@ -23,6 +23,10 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
+         body={
+        background-image: url("../../images/double-bubble-dark.webp");
+
+    }
     </style>
 </head>
 
