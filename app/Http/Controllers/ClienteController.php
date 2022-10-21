@@ -2,104 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ciudad;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\StoreClienteRequest;
+
+use App\Models\Localidad;
 use App\Models\Cliente;
 
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-
         $clientes = Cliente::all();
-
-        return view('clientes.index', ['clientes' => $clientes ]);
+        return view('clientes.index', ['clientes' => $clientes]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $localides = Ciudad::all();
-
-        return view('clientes.create', [ 'localides' => $localides]);
+        return view('clientes.create', ['localidades' => Localidad::all()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        $cliente = new Cliente();
-        $cliente-> name = $request -> input('input_name');
-        $cliente-> surname = $request -> input('input_surname');
-        $cliente-> email = $request -> input('input_email');
-        $cliente-> address = $request -> input('input_address');
-        $cliente-> phone = $request -> input('input_phone');
-        $cliente-> city_id = $request-> input('input_city_id');
-        $cliente-> save();
-        return redirect()->action([ClienteController::class, 'index']);
+        $cliente = Cliente::create($request->validated());
+        return redirect()->route('clientes.index');
     }
-    public function list(){
-        return view('clientes.list', ['clientes'=> Cliente::all()]);
+    public function list()
+    {
+        return view('clientes.list', ['clientes' => Cliente::all()]);
+    }
 
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
         $cliente = cliente::find($id);
-
-        return view('clientes.show', ['cliente' => $cliente, 'localides' => Ciudad::All()]);
-
+        return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $cliente = Cliente::find($id);
-        $cliente-> name = $request -> input('input_name');
-        $cliente-> surname = $request -> input('input_surname');
-        $cliente-> email = $request -> input('input_email');
-        $cliente-> city_id = $request-> input('select_city_id');
-        $cliente-> save();
+        $cliente->name = $request->input('input_name');
+        $cliente->surname = $request->input('input_surname');
+        $cliente->email = $request->input('input_email');
+        $cliente->city_id = $request->input('select_city_id');
+        $cliente->save();
 
-        return Redirect()->action([ClienteController::class, 'show'], ['id'=> $id]);
+        return redirect()->route('clientes.show', ['id' => $id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $cliente = Cliente::destroy($id);
         return back()->with('success', 'Cliente eliminado');
-
+        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje. 
+        //Investigar 
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\ProveedorController;
  
 Route::pattern('id', '[0-9]+');
 
+// Route::get('/', 'index')->name('dashboard');
+
 Route::controller(ClienteController::class)->group(function () {
     Route::get('/', 'index')->name('clientes.index');
     Route::get('clientes/create','create')->name('clientes.create');
