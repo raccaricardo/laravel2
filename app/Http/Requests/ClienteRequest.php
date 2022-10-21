@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-class StoreClienteRequest extends FormRequest
+class ClienteRequest extends FormRequest
 {
  
     public function authorize()
@@ -19,13 +19,13 @@ class StoreClienteRequest extends FormRequest
             'direccion' => ['required', 'string'],
             'telefono' => ['required', 'string'],
             'email' => ['required', 'string', 'unique:clientes'],
-            'localidad'=> ['required', 'exists:localidades,id']
-            // 'email_secundario' => ['string', 'nullable'],
-            // 'dni' => ['string', 'nullable'],
-            // 'razon_social' => ['string', 'nullable'],
-            // 'razon_social_direccion' => ['string', 'nullable'],
-            // 'razon_social_localidad' => ['string', 'nullable'],
-            // 'razon_social_cuit' => ['string', 'nullable'] 
+            'localidad'=> ['required', 'exists:localidades,id'],
+            'email_secundario' => ['string', 'nullable'],
+            'dni' => ['string', 'nullable'],
+            'razon_social' => ['string', 'nullable'],
+            'razon_social_direccion' => ['string', 'nullable'],
+            'razon_social_localidad' => ['string', 'nullable'],
+            'razon_social_cuit' => ['string', 'nullable'] 
         ];
     }
 }

@@ -3,64 +3,80 @@
 
 
 @section('content')
-    @if (!isset($customer))
+    @if (!isset($cliente))
         <div class="page-header mt-5">
             <h1>
                 USUARIO NO ENCONTRADO
             </h1>
         </div>
-    @else
-        <div class="page-header mt-5">
-            <h1>Detalles de cliente:</h1>
-            <h2>{{ $customer->name . ' ' . $customer->surname }}</h2>
+        @extends('layouts.template')
+@section('title', 'Agregar cliente')
+@section('content')
+
+    CREAR UN NUEVO
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="{{ url('/clientes') }}" method='put'>
+        @csrf
+
+        <div class="form-group">
+            <label for="input_nombre">Nombre</label>
+            <input autofocus type="text" class="form-control @error('nombre') is-invalid @enderror" id="input_nombre"
+                name="nombre" aria-describedby="name" placeholder="Nombre">
+            @error('input_nombre')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Por favor ingrese un nombre
+                </div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="surname">Apellido</label>
+            <input type="text" class="form-control" id="input_apellido" name="apellido" aria-describedby="surname"
+                placeholder="Ingrese su apellido">
+        </div>
+        <div class="form-group">
+            <label for="address">Direccion</label>
+            <input type="text" class="form-control" id="input_direccion" name="direccion" aria-describedby="address"
+                placeholder="Ingrese su direccion">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefono</label>
+            <input type="text" class="form-control" id="input_telefono" name="telefono" aria-describedby="phone"
+                placeholder="Ingrese su numero de telefono">
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <label for="input_localidad_id">Ciudad</label>
+                <select class="form-select" name="localidad" id="input_localidad_id">
+                    <option value="">Seleccione una ciudad</option>
+                    @foreach ($localidades as $localidad)
+                        <option value="{{ $localidad->id }}">{{ $localidad->nombre }}</option>
+                    @endforeach
+                </select>
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="input_email" name="email" aria-describedby="emailHelp"
+                placeholder="Ingrese su correo electronico">
         </div>
 
-        <form action="{{ url('/customers/' . $customer->id) }}" id='form' method='post'>
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="input_name">Nombre</label>
-                <input type="text" class="form-control" id="input_name" name="input_name" value="{{ $customer->name }}"
-                    disabled aria-describedby="name" placeholder="Ingrese su nombre">
-                <small id="name" class="form-text text-muted">We'll never share your information with anyone
-                    else.</small>
-            </div>
-            <div class="form-group">
-                <label for="surname">Apellido</label>
-                <input type="text" class="form-control" id="input_surname" name="input_surname"
-                    value="{{ $customer->surname }}" disabled aria-describedby="surname" placeholder="Ingrese su apellido">
-            </div>
-            <div class="form-group">
-                <label for="select_city_id">Ciudad</label>
-                <select class="form-control" id="select_city_id" name='select_city_id' disabled>
-                    <option value="0">Seleccione una ciudad</option>
-                    @foreach ($cities as $city)
-                        @if ($city->id == $customer->city_id)
-                            {
-                            <option value="{{ $city->id }}" selected="selected"> {{ $city->name }}</option>
-                        }@else{
-                            <option value="{{ $city->id }}"> {{ $city->name }}</option>
-                            }
-                        @endif
-                    @endforeach
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="input_email" name="input_email" disabled
-                    value="{{ $customer->email }}" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
+@endsection
 
-            <button type='button' autofocus class="btn btn-secondary me-3" id='btn-enable-form'
-                onClick='enableForm()'>Editar</button>
-            <button type="submit" class="btn btn-primary ms-3" disabled>Guardar</button>
-
-        </form>
-
-
-    @endif
 
     @section('scripts')
         <script>

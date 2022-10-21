@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\StoreClienteRequest;
+use App\Http\Requests\ClienteRequest;
 
 use App\Models\Localidad;
 use App\Models\Cliente;
@@ -12,6 +12,13 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
+    /*
+    *
+    * TODO: 
+    * Validacion Request UpdateCliente
+    * Validaciones en el front
+    * Hacer 1 component por cada form(del edit)
+    */
 
     public function index()
     {
@@ -24,7 +31,7 @@ class ClienteController extends Controller
         return view('clientes.create', ['localidades' => Localidad::all()]);
     }
 
-    public function store(StoreClienteRequest $request)
+    public function store(ClienteRequest $request)
     {
         $cliente = Cliente::create($request->validated());
         return redirect()->route('clientes.index');
@@ -40,15 +47,9 @@ class ClienteController extends Controller
         return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ClienteRequest $request, $id)
     {
-        $cliente = Cliente::find($id);
-        $cliente->name = $request->input('input_name');
-        $cliente->surname = $request->input('input_surname');
-        $cliente->email = $request->input('input_email');
-        $cliente->city_id = $request->input('select_city_id');
-        $cliente->save();
-
+        $cliente = Cliente::create($request->validated());
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 

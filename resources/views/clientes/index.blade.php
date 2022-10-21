@@ -11,12 +11,14 @@
 
             <table class='table table-responsive table-dark table-striped captation-top'>
                 <thead class='table-dark'>
-                    <tr>>
+                    <tr>
                         <td scope='col'>Nombre</td>
                         <td scope='col'>Apellido</td>
                         <td scope='col'>Email</td>
                         <td scope='col'>Localidad</td>
                         <td></td>
+                        <td></td>
+
                     </tr>
                 </thead>
                 <tbody>
