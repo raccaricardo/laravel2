@@ -10,10 +10,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('listas_clientes', function (Blueprint $table) {
-            $table->bigInteger('lista');
-            $table->bigInteger('cliente');
-            $table->primary('lista', 'cliente');
+            $table->unsignedBigInteger('lista');
+            $table->unsignedBigInteger('cliente');
+            $table->primary(['lista', 'cliente']);
+        });    
+        Schema::table('listas_clientes', function ($table) {
+            $table->foreign('lista')->references('id')->on('listas_precios')-> onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('cliente')->references('id')->on('clientes')-> onUpdate('cascade')->onDelete('restrict');
         });
+
+         
     }
     
     public function down()

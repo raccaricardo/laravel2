@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Customer;
+use App\Models\Cliente;
+use Database\Factories\ClienteFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,10 +20,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([ 
-            StateSeeder::class,
-            CitySeeder::class, 
-            CustomerSeeder::class,
-            IvaSeeder::class
+            LocalidadSeeder::class, 
+            // ClienteSeeder::class,
+            // IvaSeeder::class
         ]);
+        Cliente::factory(100)->create();
     }
 }

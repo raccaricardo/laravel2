@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+use App\Models\Ciudad;
 use Illuminate\Http\Request;
 
 use App\Models\Cliente;
@@ -30,9 +30,9 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        $cities = City::all();
+        $localides = Ciudad::all();
 
-        return view('clientes.create', [ 'cities' => $cities]);
+        return view('clientes.create', [ 'localides' => $localides]);
     }
 
     /**
@@ -68,7 +68,7 @@ class ClienteController extends Controller
         //
         $cliente = cliente::find($id);
 
-        return view('clientes.show', ['cliente' => $cliente, 'cities' => City::All()]);
+        return view('clientes.show', ['cliente' => $cliente, 'localides' => Ciudad::All()]);
 
     }
     /**
