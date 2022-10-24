@@ -9,7 +9,6 @@ use App\Http\Requests\ClienteRequest;
 use App\Models\Localidad;
 use App\Models\Cliente;
 
-
 class ClienteController extends Controller
 {
     /*
@@ -28,12 +27,13 @@ class ClienteController extends Controller
 
     public function create()
     {
-        return view('clientes.create', ['localidades' => Localidad::all()]);
+     
+        return view('clientes.create', [ 'localidades' => Localidad::all() ]);
     }
 
     public function store(ClienteRequest $request)
     {
-        $cliente = Cliente::create($request->validated());
+        Cliente::create($request->validated());
         return redirect()->route('clientes.index');
     }
     public function list()
@@ -43,13 +43,16 @@ class ClienteController extends Controller
 
     public function show($id)
     {
-        $cliente = cliente::find($id);
+        $cliente = cliente::findOrFail($id);
         return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
     }
 
     public function update(ClienteRequest $request, $id)
     {
-        $cliente = Cliente::create($request->validated());
+        
+        $cliente = Cliente::findOrFail($id);
+        $cliente = $request->validated();
+        $cliente -> save();
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 

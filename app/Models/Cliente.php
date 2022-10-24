@@ -11,7 +11,20 @@ class Cliente extends Model
     use SoftDeletes;
 
     protected $table = 'clientes';
-    protected $fillable = ['localidad', 'nombre', 'apellido', 'direccion', 'telefono', 'email'];
+    protected $fillable = [
+        'nombre',
+        'apellido',
+        'direccion',
+        'localidad',
+        'telefono',
+        'email',
+        'email_secundario',
+        'dni',
+        'razon_social',
+        'razon_social_direccion',
+        'razon_social_localidad',
+        'razon_social_cuit'
+    ];
 
 
     public function localidades(){

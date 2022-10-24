@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('dni', 255)-> nullable()->default(null);
             $table->string('razon_social')-> nullable()->default(null);
             $table->string('razon_social_direccion')-> nullable()->default(null);
-            $table->string('razon_social_localidad')-> nullable()->default(null);
             $table->string('razon_social_cuit')-> nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();

@@ -24,7 +24,7 @@ class ClienteRequest extends FormRequest
             'dni' => ['string', 'nullable'],
             'razon_social' => ['string', 'nullable'],
             'razon_social_direccion' => ['string', 'nullable'],
-            'razon_social_localidad' => ['string', 'nullable'],
+            'razon_social_localidad' => ['nullable', 'exists:localidades,id'],
             'razon_social_cuit' => ['string', 'nullable'] 
         ];
     }
