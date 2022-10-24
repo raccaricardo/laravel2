@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\MessageBag;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
+use Illuminate\Http\Request;
+
+use App\Http\Requests\ProveedorRequest;
 use App\Models\Localidad;
 use App\Models\Iva;
 use App\Models\Proveedor;
-use Illuminate\Http\Request;
-use Illuminate\Support\MessageBag;
-
 
 class ProveedorController extends Controller
 {
@@ -20,53 +22,34 @@ class ProveedorController extends Controller
     public function create()
     {
         $localidades = Localidad::all();
-        $ivas = Iva::all();
-        return view('proveedores.create', ['localidades'=>$localidades, 'ivas'=>$ivas]);
+        $iva = Iva::all();
+        return view('proveedores.create', ['localidades'=>$localidades, 'ivas'=>$iva]);
     }
 
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {
-        $validations = $request -> validate([
-            'name' => 'unique | max: 50',
-            'razon_social' => 'required | unique | max: 100',
-            'direccion' => 'required | max: 100',
-            'email' => 'required | max: 100',
-            'sitio_web' => 'required | max: 100 | regex: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
-        ]);
-
-        $proveedor = new Proveedor();
-        $proveedor -> nombre = $request -> input('input_nombre');
-        $proveedor -> razon_social = $request -> input('input_razon_social');
-        $proveedor -> cuit = $request -> input('input_cuit');
-        $proveedor -> direccion = $request -> input('input_direccion');
-        $proveedor -> telefono = $request -> input('input_telefono');
-        $proveedor -> email = $request -> input('input_email');
-        
-        $proveedor -> sitio_web = $request -> input('input_sitio_web');
-        $proveedor -> save();
-        return to_route('proveedores');
+        $proveedor = Proveedor::create($request->validated());
+        return redirect()->route('proveedores.show', ['id'=> $proveedor->id]);
     }
 
     public function show($id)
     {
-        //
-    }
-
-    public function edit($id)
-    {
+        $condicion_fiscal = Iva::all();
         $localidades = Localidad::all();
-        $iva = Iva::all();
-        return view('proveedores.show', ['item'  = Iva::all()];
-        return view('proveedores.show', ['item' => Proveedor::find($id), 'localidades'=> $localidades, 'iva'=> $iva, 'editable' => true]);
+        $proveedor = Proveedor::findOrFail($id);
+        return view('proveedores.show', ['proveedor'=>$proveedor, 'ivas'=> $condicion_fiscal, 'localidades' => $localidades ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProveedorRequest $request, $id)
     {
-        //
+        $proveedor = Proveedor::findOrFail($id);
+        $proveedor-> update($request->validated());
+        return redirect()->route('proveedores.show', ['id' => $id]);
     }
 
     public function destroy($id)
     {
-        //
+        Proveedor::destroy($id);
+        return redirect()->route('proveedores.index');
     }
 }

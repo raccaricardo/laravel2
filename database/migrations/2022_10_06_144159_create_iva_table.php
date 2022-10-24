@@ -14,7 +14,6 @@ return new class extends Migration
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
             $table->string('nombre', 150)->unique();
-            $table->string('imagen')->nullable()->default('text');
             $table->timestamps();
     
         });

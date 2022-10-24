@@ -13,13 +13,14 @@ return new class extends Migration
             $table-> charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
-            $table->timestamps();
             $table->string('nombre')-> unique();
             $table->string('razon_social');
             $table->string('cuit')->nullable()->unique();
             $table->string('direccion');
+            $table->string('telefono', 100)->nullable()->default(null);    
             $table->string('email');
             $table->string('sitio_web')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Cliente;
-use Database\Factories\ClienteFactory;
 use Illuminate\Database\Seeder;
+
+use App\Models\Cliente;
+use App\Models\Proveedor;
+use Database\Factories\ClienteFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,8 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call([ 
             LocalidadSeeder::class, 
             // ClienteSeeder::class,
-            // IvaSeeder::class
+            IvaSeeder::class
         ]);
         Cliente::factory(100)->create();
+        Proveedor::factory(100)->create();
+
     }
 }

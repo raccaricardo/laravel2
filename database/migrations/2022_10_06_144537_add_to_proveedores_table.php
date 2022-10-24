@@ -11,16 +11,16 @@ return new class extends Migration
         Schema::table('proveedores', function (Blueprint $table) {
 
             $table->after('id', function ($table) {
-                $table->foreignId('localidad')
-                    ->constrained('localidades')
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            });
-            $table->after('id', function ($table) {
                 $table->foreignId('condicion_fiscal')
                     ->constrained('iva')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');
+                    ->onDelete('restrict');
+            });
+            $table->after('id', function ($table) {
+                $table->foreignId('localidad')
+                    ->constrained('localidades')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
             });
         });
     }

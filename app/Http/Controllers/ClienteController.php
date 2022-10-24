@@ -11,13 +11,6 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    /*
-    *
-    * TODO: 
-    * Validacion Request UpdateCliente
-    * Validaciones en el front
-    * Hacer 1 component por cada form(del edit)
-    */
 
     public function index()
     {
@@ -27,39 +20,42 @@ class ClienteController extends Controller
 
     public function create()
     {
-     
         return view('clientes.create', [ 'localidades' => Localidad::all() ]);
     }
 
     public function store(ClienteRequest $request)
     {
         Cliente::create($request->validated());
-        return redirect()->route('clientes.index');
+        return redirect()->route('clientes.show', [ 'id'=> $id ]);
     }
     public function list()
     {
         return view('clientes.list', ['clientes' => Cliente::all()]);
     }
 
+    // public function show(Cliente $cliente)
+    // {
+    //     return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
+    // }
     public function show($id)
-    {
-        $cliente = cliente::findOrFail($id);
-        return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
+    {   
+        return view('clientes.show', ['cliente'=>Cliente::findOrFail($id), 'localidades'=> Localidad::All()]);
     }
 
     public function update(ClienteRequest $request, $id)
     {
-        
-        $cliente = Cliente::findOrFail($id);
-        $cliente = $request->validated();
-        $cliente -> save();
+        $cliente = Cliente :: findOrFail($id);
+        $cliente -> update($request->validated());
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 
     public function destroy($id)
     {
         $cliente = Cliente::destroy($id);
+        $cliente = Cliente::destroy($id);
         return back()->with('success', 'Cliente eliminado');
+        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje. 
+        //Investigar    return back()->with('success', 'Cliente eliminado');
         //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje. 
         //Investigar 
     }

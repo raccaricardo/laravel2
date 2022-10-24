@@ -27,8 +27,6 @@ class ClienteFactory extends Factory
             'razon_social_direccion'=>$this->faker-> streetAddress,
             'razon_social_localidad'=>$this->faker-> numberBetween(1,7),
             'razon_social_cuit'=>$this->faker->numerify('23-#########-7')
-
-
         ];
     }
 }

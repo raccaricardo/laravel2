@@ -10,8 +10,20 @@ class Proveedor extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'proveedores';
+    protected $fillable = [
+        'localidad',
+        'condicion_fiscal',
+        'nombre',
+        'razon_social',
+        'cuit',
+        'direccion',
+        'telefono',
+        'email',
+        'sitio_web'
+    ];
 
-    public function localidad(){
+    public function localidades(){
         return $this->belongsTo(Localidad::class, 'localidad');
     }
     public function condicion_fiscal(){
