@@ -4,7 +4,7 @@
 
     <h1 class='mt-5'>
         GUARDAR UN NUEVO PROVEEDOR
-    </h1>
+    <h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">

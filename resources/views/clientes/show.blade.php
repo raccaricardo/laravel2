@@ -18,7 +18,7 @@
     </div>
     @endif
 
-    <form action="{{ url('/clientes') }}" method='put'>
+    <form action="{{ route('clientes.update', ['id'=>$cliente->id]) }}" method='POST'>
         @method('PUT')
         <x-cliente-form :localidades=$localidades titulo='Informacion de cliente:' :cliente=$cliente/>
         <button type='button' autofocus class="btn btn-secondary me-3 mt-3" id='btn-enable-form'

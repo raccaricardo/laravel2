@@ -53,8 +53,8 @@
                                 Clientes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{url('/customers')}}">Listado</a></li>
-                                <li><a class="dropdown-item" href="{{url('/customers/create')}}">Agregar cliente</a></li>
+                                <li><a class="dropdown-item" href="{{url('/clientes')}}">Listado</a></li>
+                                <li><a class="dropdown-item" href="{{url('/clientes/create')}}">Agregar cliente</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -80,11 +80,11 @@
                                 Proveedores
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{url('/providers')}}">Listado</a></li>
+                                <li><a class="dropdown-item" href="{{url('/proveedores')}}">Listado</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="{{url('/providers/create')}}">Agregar nuevo Proveedor</a></li>
+                                <li><a class="dropdown-item" href="{{url('/proveedores/create')}}">Agregar nuevo Proveedor</a></li>
                             </ul>
                         </li>
                     </ul>

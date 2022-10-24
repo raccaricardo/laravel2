@@ -9,7 +9,7 @@
             Listado de Clientes
         </h1>
 
-        <a href="{{ url('/clientes/create') }}" class='btn btn-primary mt-5 mb-2 focus'>Anadir nuevo cliente</a>
+        <a href="{{ route('clientes.create') }}" class='btn btn-primary mt-5 mb-2 focus'>Anadir nuevo cliente</a>
         
         <div class="table-responsive">
 
