@@ -34,9 +34,9 @@
     </div>
     @if( !isset($cliente->localidades->id))
     <div class="form-group">
-        <label for="input_localidad_id">Ciudad</label>
+        <label for="input_localidad_id">Localidad</label>
         <select class="form-select @error('localidad') is-invalid @enderror" name="localidad" id="input_localidad_id">
-            <option value="">Seleccione una ciudad</option>
+            <option value="">Seleccione una localidad</option>
             @foreach ($localidades as $localidad)
             <option value="{{ $localidad->id }}" {{old('localidad')}} > {{ $localidad->nombre }}</option>
             @endforeach

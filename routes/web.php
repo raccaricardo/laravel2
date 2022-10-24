@@ -22,11 +22,10 @@ Route::controller(ClienteController::class)->group(function () {
 Route:: controller(ProveedorController::class)-> group(function(){
     Route::get('proveedores', 'index')->name('proveedores.index');
     Route::get('proveedores/create', 'create')->name('proveedores.create');
-    Route::get('proveedores/{id}/edit', 'edit')->name('proveedores.edit');
     Route::get('proveedores/{id}', 'show')->name('proveedores.show');
 
     //methods forms
-    Route:: put('proveedores', 'edit')->name('proveedores.edit');
+    Route:: put('proveedores', 'update')->name('proveedores.update');
     Route::post('proveedores', 'store')->name('proveedores.store');
     Route::delete('proveedores', 'delete')->name('proveedores.delete');
 });

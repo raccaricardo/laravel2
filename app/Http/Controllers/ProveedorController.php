@@ -37,6 +37,9 @@ class ProveedorController extends Controller
         $condicion_fiscal = Iva::all();
         $localidades = Localidad::all();
         $proveedor = Proveedor::findOrFail($id);
+        if(!$id){
+            $proveedor = Proveedor::make([]);
+        }
         return view('proveedores.show', ['proveedor'=>$proveedor, 'ivas'=> $condicion_fiscal, 'localidades' => $localidades ]);
     }
 
