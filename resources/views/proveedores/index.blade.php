@@ -45,8 +45,8 @@
                                 <td>{{ $item->sitio_web }} </td>
 
                                 <td>
-                                    <a href="/proveedores/{{ $item->id }}/edit" class='btn btn-primary w-100 mb-1'>Editar</a>
-                                    <form action="{{ url('/proveedores/' . $item->id) }}" method='post'>
+                                    <a href="/proveedores/{{ $item->id }}" class='btn btn-primary w-100 mb-1'>Editar</a>
+                                    <form action="{{ route('proveedores.delete', ['id'=>$item->id] ) }}" method='post'>
                                         @csrf
                                         @method('DELETE')
                                         <button type='submit' class='btn btn-danger w-100'>Borrar</a>

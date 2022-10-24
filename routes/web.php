@@ -25,9 +25,9 @@ Route:: controller(ProveedorController::class)-> group(function(){
     Route::get('proveedores/{id}', 'show')->name('proveedores.show');
 
     //methods forms
-    Route:: put('proveedores', 'update')->name('proveedores.update');
+    Route:: put('proveedores/{id}', 'update')->name('proveedores.update');
     Route::post('proveedores', 'store')->name('proveedores.store');
-    Route::delete('proveedores', 'delete')->name('proveedores.delete');
+    Route::delete('proveedores/{id}', 'delete')->name('proveedores.delete');
 });
 Route::controller(FabricanteController::class)->group(function () {
     Route::get('/fabricantes', 'index')->name('fabricantes.index');
@@ -35,9 +35,9 @@ Route::controller(FabricanteController::class)->group(function () {
     Route::get('/fabricantes/{id}', 'show')->name('fabricantes.show');
     Route::post('/fabricantes', 'store')->name('fabricantes.store');
         //methods forms
-        Route::post('fabricantes', 'store')->name('fabricantes.store');
-        Route:: put('fabricantes', 'edit')->name('fabricantes.edit');
-        Route::delete('fabricantes', 'delete')->name('fabricantes.delete');
+        Route::post('fabricantes/', 'store')->name('fabricantes.store');
+        Route:: put('fabricantes/{id}', 'edit')->name('fabricantes.edit');
+        Route::delete('fabricantes/{id}', 'delete')->name('fabricantes.delete');
 });
 
 // Route::get('/{db_table}/{search}', function ($db_table, $search) {
