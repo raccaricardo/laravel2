@@ -6,25 +6,25 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProveedorRequest extends FormRequest
 {
-    
+
     public function authorize()
     {
         return true;
     }
 
-    
+
     public function rules()
     {
         return [
-            'localidad' => ['required' ],
-            'condicion_fiscal' => [ ],
-            'nombre' => [ 'required' | 'unique'],
+            'localidad'=> ['required', 'exists:localidades,id'],
+            // 'condicion_fiscal' => [ ],
+            'nombre' => [ 'string', 'required', 'unique:proveedores,nombre'],
             'razon_social' => ['required'],
-            'cuit' => ['string' | 'nullable' | 'unique'],
-            'direccion' => ['string'],
-            'telefono' => ['string' | 'max:100' | 'nullable'],
-            'email' => [ 'string' | 'email' | 'nullable'],
-            'sitio_web' => ['nullable' | 'url' ],
+            'cuit' => ['string' ,'nullable', 'unique:proveedores,cuit'],
+            'direccion' => ['string' ,'nullable'],
+            'telefono' => ['string', 'nullable', 'max:100'],
+            'email' => [ 'string', 'nullable', 'email'],
+            'sitio_web' => [ 'url', 'nullable' ],
         ];
     }
 }

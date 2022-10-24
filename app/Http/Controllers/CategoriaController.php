@@ -7,24 +7,19 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $categorias = Categoria::All();
+        if(!$categorias){
+            return redirect()->route('categorias.index');
+        }
+        return view('categorias.index', ['categorias' => $categorias ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
@@ -35,7 +30,11 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        error_log( $request->nombre);
+        $categoria = Categoria::create();
+        $categoria -> nombre = $request->nombre;
+        $categoria->save();
+        return redirect()->route('categorias.index');
     }
 
     /**
