@@ -38,14 +38,14 @@ class ClienteController extends Controller
     //     return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
     // }
     public function show($id)
-    {   
+    {
         return view('clientes.show', ['cliente'=>Cliente::findOrFail($id), 'localidades'=> Localidad::All()]);
     }
 
     public function update(ClienteRequest $request, $id)
     {
         $cliente = Cliente :: findOrFail($id);
-        $cliente -> update($request->validated());
+        $cliente -> update($request->validated($cliente));
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 
@@ -54,9 +54,9 @@ class ClienteController extends Controller
         $cliente = Cliente::destroy($id);
         $cliente = Cliente::destroy($id);
         return back()->with('success', 'Cliente eliminado');
-        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje. 
+        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
         //Investigar    return back()->with('success', 'Cliente eliminado');
-        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje. 
-        //Investigar 
+        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
+        //Investigar
     }
 }

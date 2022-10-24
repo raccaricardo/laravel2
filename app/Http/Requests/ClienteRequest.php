@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 class ClienteRequest extends FormRequest
 {
 
@@ -21,7 +23,10 @@ class ClienteRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                'unique:clientesunique'
+
+                // Rule::unique('clientes')->ignore($cliente->id),
+                // 'unique:clientes,email'),
+                'unique:clientes,email,'.$this->route('id'),
         ],
             'localidad'=> ['required', 'exists:localidades, id'],
             'email_secundario' => ['string', 'nullable'],

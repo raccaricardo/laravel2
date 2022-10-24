@@ -7,7 +7,6 @@
         <ins>Cliente {{$cliente->id}}: {{$cliente->nombre.' '. $cliente->apellido}}</ins>
     </h1>
 
-    <h1></h1>
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

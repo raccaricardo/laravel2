@@ -54,7 +54,6 @@
                         <td scope='col'>ID</td>
                         <td>Nombre</td>
                         <td></td>
-                        <td></td>
 
                     </tr>
                 </thead>
@@ -66,14 +65,15 @@
                                 <td>{{ $item->nombre }} </td>
 
                                 <td>
-                                    <a href="/categorias/{{ $item->id }}" class='btn btn-primary w-100 mb-1'>Editar</a>
+                                    <a href="/categorias/{{ $item->id }}" class='btn btn-primary w-75 mb-1'>Editar</a>
                                     <form action="{{ url('/categorias/' . $item->id) }}" method='post'>
                                         @csrf
                                         @method('DELETE')
-                                        <button type='submit' class='btn btn-danger w-100'>Borrar</a>
+                                        <button type='submit' class='btn btn-danger w-75'>Borrar</a>
                                     </form>
                                 </td>
                             </tr>
+
                         @endforeach
                     @endisset
                 </tbody>

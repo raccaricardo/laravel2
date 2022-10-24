@@ -31,8 +31,9 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         error_log( $request->nombre);
-        $categoria = Categoria::create();
-        $categoria -> nombre = $request->nombre;
+
+        $categoria = new Categoria();
+        $categoria -> nombre = $request->input('nombre');
         $categoria->save();
         return redirect()->route('categorias.index');
     }

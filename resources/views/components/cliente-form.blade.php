@@ -32,35 +32,17 @@
             Ingrese numero de telefono del cliente
         </div>
     </div>
-    @if( !isset($cliente->localidades->id))
-    <div class="form-group">
-        <label for="input_localidad_id">Localidad</label>
-        <select class="form-select @error('localidad') is-invalid @enderror" name="localidad" id="input_localidad_id">
-            <option value="">Seleccione una localidad</option>
-            @foreach ($localidades as $localidad)
-            <option value="{{ $localidad->id }}" {{old('localidad')}} > {{ $localidad->nombre }}</option>
+   <tr>
+    <th scope="row">Localidad</th>
+    <td>
+        <select id="localidad" name="localidad" class="form-select" aria-describedby="localidadHelp">
+            <option value="">Seleccione...</option>
+            @foreach ($localidades as $item)
+                <option value="{{$item->id}}">{{$item->nombre}}</option>
             @endforeach
         </select>
-
-        <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Seleccione la ciudad del cliente
-        </div>
-    </div>
-    @else
-    <div class="form-group">
-        <label for="input_localidad_id">Ciudad</label>
-        <select class="form-select @error('localidad') is-invalid @enderror" name="localidad" id="input_localidad_id">
-            <option value="">Seleccione una ciudad</option>
-            @foreach ($localidades as $localidad)
-            <option value="{{ $localidad->id }}" {{old('localidad', ($cliente->localidades->id) ? $cliente->localidades->id : '') == $localidad->id ? 'selected' : ''}} > {{ $localidad->nombre }}</option>
-            @endforeach
-        </select>
-
-        <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Seleccione la ciudad del cliente
-        </div>
-    </div>
-    @endif
+    </td>
+    </tr>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control @error('email') is-invalid @enderror" id="input_email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico" value="{{old( 'email', $cliente->email )}}">
