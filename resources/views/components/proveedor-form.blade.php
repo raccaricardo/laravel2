@@ -35,12 +35,12 @@
         <select class="form-select @error('condicion_fiscal') is-invalid @enderror" name="condicion_fiscal" id="input_condicion_fiscal">
             <option value="">Seleccione condicion fiscal</option>
             @foreach ($ivas as $iva)
-            <option value="{{ $iva->id }}" {{old('condicion_fiscal', ($proveedor->condicion_fiscal->id) ? $proveedor->condicion_fiscal->id : '') == $localidad->id ? 'selected' : ''}} > {{ $localidad->nombre }}</option>
+            <option value="{{ $iva->id }}" {{old('condicion_fiscal', ($proveedor->condicion_fiscal->id) ? $proveedor->condicion_fiscal->id : '') == $iva->id ? 'selected' : ''}} > {{ $iva->nombre }}</option>
             @endforeach
         </select>
 
         <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Seleccione la ciudad del proveedor
+            Seleccione la condicion fiscal del proveedor
         </div>
     </div>
     @endif

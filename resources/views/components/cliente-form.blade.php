@@ -33,16 +33,20 @@
         </div>
     </div>
    <tr>
-    <th scope="row">Localidad</th>
-    <td>
+    
+    <div class="form-group">
+        <label for="localidad">Localidad</label>
         <select id="localidad" name="localidad" class="form-select" aria-describedby="localidadHelp">
             <option value="">Seleccione...</option>
             @foreach ($localidades as $item)
-                <option value="{{$item->id}}">{{$item->nombre}}</option>
+            <option value="{{$item->id}}" {{old('localidad', $cliente->localidades?->id) == $item->id ? 'selected' : ""}} >{{$item->nombre}}</option>
             @endforeach
         </select>
-    </td>
-    </tr>
+        <div id="localidad" class="invalid-feedback">
+            Ingrese localidad del cliente
+        </div>
+    </div>
+    
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control @error('email') is-invalid @enderror" id="input_email" name="email" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico" value="{{old( 'email', $cliente->email )}}">

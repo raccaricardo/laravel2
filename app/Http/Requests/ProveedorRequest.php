@@ -17,14 +17,14 @@ class ProveedorRequest extends FormRequest
     {
         return [
             'localidad'=> ['required', 'exists:localidades,id'],
-            // 'condicion_fiscal' => [ ],
-            'nombre' => [ 'string', 'required', 'unique:proveedores,nombre'],
+            'condicion_fiscal' => [ ],
+            'nombre' => [ 'required', 'unique:proveedores,nombre,'.$this->route('id')],
             'razon_social' => ['required'],
-            'cuit' => ['string' ,'nullable', 'unique:proveedores,cuit'],
-            'direccion' => ['string' ,'nullable'],
-            'telefono' => ['string', 'nullable', 'max:100'],
-            'email' => [ 'string', 'nullable', 'email'],
-            'sitio_web' => [ 'url', 'nullable' ],
+            'cuit' => ['string', 'nullable', 'unique:proveedores,cuit,'.$this->route('id')],
+            'direccion' => ['string'],
+            'telefono' => ['string', 'max:100', 'nullable'],
+            'email' => [ 'string', 'email', 'nullable', 'unique:proveedores,email,'.$this->route('id')],
+            'sitio_web' => ['nullable', 'url' ],
         ];
     }
 }
