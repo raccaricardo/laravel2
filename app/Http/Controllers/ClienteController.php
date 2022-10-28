@@ -45,15 +45,15 @@ class ClienteController extends Controller
     public function update(ClienteRequest $request, $id)
     {
         $cliente = Cliente :: findOrFail($id);
-        $cliente -> update($request->validated($cliente));
+        $cliente -> update($request->validated());
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 
     public function destroy($id)
     {
         $cliente = Cliente::destroy($id);
-        $cliente = Cliente::destroy($id);
-        return back()->with('success', 'Cliente eliminado');
+        return redirect()->route('clientes.index');
+        // return back()->with('success', 'Cliente eliminado');
         //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
         //Investigar    return back()->with('success', 'Cliente eliminado');
         //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
