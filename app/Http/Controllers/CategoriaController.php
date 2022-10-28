@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
+use Error;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -22,64 +24,29 @@ class CategoriaController extends Controller
         return view('categorias.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
-        error_log( $request->nombre);
-
-        $categoria = new Categoria();
-        $categoria -> nombre = $request->input('nombre');
-        $categoria->save();
+        $categoria = Categoria::create($request->validated());
         return redirect()->route('categorias.index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Categoria $categoria)
+ 
+    public function show($id)
     {
-        //
+        return view('categorias.show', ['categoria'=> Categoria::findOrFail($id)]);
+
+    } 
+ 
+    public function update(CategoriaRequest $request, $id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        $categoria->update($request->validated());
+        return redirect()->route('categorias.show', ['id' => $id]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Categoria $categoria)
+  
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Categoria $categoria)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Categoria  $categoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Categoria $categoria)
-    {
-        //
+        Categoria::destroy($id);
+        return redirect()->route('categorias.index');
     }
 }

@@ -20,32 +20,28 @@ class ClienteController extends Controller
 
     public function create()
     {
-        return view('clientes.create', [ 'localidades' => Localidad::all() ]);
+        return view('clientes.create', ['localidades' => Localidad::all()]);
     }
 
     public function store(ClienteRequest $request)
     {
         $cliente = Cliente::create($request->validated());
-        return redirect()->route('clientes.show', [ 'id'=> $cliente->id ]);
+        return redirect()->route('clientes.show', ['id' => $cliente->id]);
     }
     public function list()
     {
         return view('clientes.list', ['clientes' => Cliente::all()]);
     }
 
-    // public function show(Cliente $cliente)
-    // {
-    //     return view('clientes.show', ['cliente' => $cliente, 'localidades' => Localidad::All()]);
-    // }
     public function show($id)
     {
-        return view('clientes.show', ['cliente'=>Cliente::findOrFail($id), 'localidades'=> Localidad::All()]);
+        return view('clientes.show', ['cliente' => Cliente::findOrFail($id), 'localidades' => Localidad::All()]);
     }
 
     public function update(ClienteRequest $request, $id)
     {
-        $cliente = Cliente :: findOrFail($id);
-        $cliente -> update($request->validated());
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->validated());
         return redirect()->route('clientes.show', ['id' => $id]);
     }
 
