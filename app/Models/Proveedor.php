@@ -26,7 +26,7 @@ class Proveedor extends Model
     public function localidades(){
         return $this->belongsTo(Localidad::class, 'localidad');
     }
-    public function condicion_fiscal(){
+    public function condicion(){
         return $this->belongsTo(Iva::class, 'condicion_fiscal');
     }
 

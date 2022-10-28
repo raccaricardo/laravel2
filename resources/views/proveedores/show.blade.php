@@ -1,13 +1,24 @@
 @extends('layouts.template')
-@section('title', 'Descripcion de proveedor')
+@section('title', 'Detalles de proveedor')
 
 
 @section('content')
 
-<div class="page-header mt-5">
-    <h1>Detalles de proveedor:</h1>
-    <h2>{{ $proveedor->nombre }}</h2>
-</div>
+<h1 class="h3 pt-5 fw-bold">
+        <ins>Proveedor: {{$proveedor->nombre.' '. $proveedor->apellido}}</ins>
+    </h1>
+
+
+@if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 <form action="{{ route('proveedores.update',['id' => $proveedor->id]) }}" id='form' method='post'>
     @csrf

@@ -22,8 +22,8 @@ class ProveedorController extends Controller
     public function create()
     {
         $localidades = Localidad::all();
-        $iva = Iva::all();
-        return view('proveedores.create', ['localidades'=>$localidades, 'ivas'=>$iva]);
+        $iva = Iva::all();        
+        return view('proveedores.create', ['localidades'=>$localidades, 'ivas'=>$iva, 'proveedor'=>Proveedor::make()]);
     }
 
     public function store(ProveedorRequest $request)
