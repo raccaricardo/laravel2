@@ -8,14 +8,15 @@ use App\Http\Requests\ClienteRequest;
 
 use App\Models\Localidad;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
 
     public function index()
     {
-        $clientes = Cliente::all();
-        return view('clientes.index', ['clientes' => $clientes]);
+        $loc = DB::table('localidades')->get();
+        return view('clientes.index', ['localidades'=> $loc]);
     }
 
     public function create()
@@ -37,22 +38,17 @@ class ClienteController extends Controller
     {
         return view('clientes.show', ['cliente' => Cliente::findOrFail($id), 'localidades' => Localidad::All()]);
     }
-
+    
     public function update(ClienteRequest $request, $id)
     {
         $cliente = Cliente::findOrFail($id);
         $cliente->update($request->validated());
-        return redirect()->route('clientes.show', ['id' => $id]);
+        return back()-> with('cliente_editado', 'El cliente ha sido editado');
     }
 
     public function destroy($id)
     {
         $cliente = Cliente::destroy($id);
-        return redirect()->route('clientes.index');
-        // return back()->with('success', 'Cliente eliminado');
-        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
-        //Investigar    return back()->with('success', 'Cliente eliminado');
-        //back() No esta funcionando. Deberia volver hacias atras con status 200 y un mensaje.
-        //Investigar
+        return back()-> with('cliente_eliminado', 'El cliente ha sido eliminado');
     }
 }

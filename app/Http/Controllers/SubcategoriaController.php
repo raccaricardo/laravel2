@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 
 class SubcategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+     public function index()
     {
-        //
+        return view('categorias.index', [ 'categorias'=> Categoria::all()]);
     }
 
     /**

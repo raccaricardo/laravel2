@@ -3,7 +3,13 @@
 
     <h2 class="h4 pt-2 fw-bold">
             {{$titulo}}
-        </h2>
+    </h2>
+    @if(Session::has('cliente_editado'))
+        <div class="alert alert-sucess bg-success" role="alert">
+            {{Session::get('cliente_editado')}}
+        </div>
+    @endif
+
     <div class="form-group">
         <label for="input_nombre">Nombre</label>
         <input autofocus type="text" class="form-control @error('nombre') is-invalid @enderror" id="input_nombre" name="nombre" aria-describedby="name" placeholder="Ingrese su nombre" value="{{old('nombre', $cliente->nombre)}}">

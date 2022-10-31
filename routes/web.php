@@ -1,7 +1,8 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubcategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FabricanteController;
 use App\Http\Controllers\ProductoController;
@@ -41,6 +42,17 @@ Route::controller(CategoriaController::class)->group(function () {
     Route::post('categorias', 'store')->name('categorias.store');
     Route::patch('categorias/{id}', 'update')->name('categorias.update');
     Route::delete('categorias/{id}', 'destroy')->name('categorias.delete');
+});
+
+Route::controller(SubcategoriaController::class)->group(function () {
+    Route::get('subcategorias', 'index')->name('categorias.index');
+    Route::get('subcategorias/create', 'create')->name('categorias.create');
+    Route::get('subcategorias/{id}', 'show')->name('categorias.show');
+    Route::post('subcategorias', 'store')->name('categorias.store');
+    //methods forms
+    Route::post('subcategorias', 'store')->name('subcategorias.store');
+    Route::patch('subcategorias/{id}', 'update')->name('subcategorias.update');
+    Route::delete('subcategorias/{id}', 'destroy')->name('subcategorias.delete');
 });
 
 Route::controller(ProductoController::class)->group(function () {

@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             // ClienteSeeder::class,
             IvaSeeder::class
         ]);
-        Cliente::factory(100)->create();
-        Proveedor::factory(100)->create();
+        Cliente::factory(4000)->create();
+        Proveedor::factory(4000)->create();
 
     }
 }
