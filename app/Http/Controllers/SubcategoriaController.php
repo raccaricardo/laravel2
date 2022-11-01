@@ -2,80 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubcategoriaRequest;
 use App\Models\Categoria;
 use App\Models\Subcategoria;
-use Illuminate\Http\Request;
 
 class SubcategoriaController extends Controller
 {
      public function index()
     {
-        return view('categorias.index', [ 'categorias'=> Categoria::all()]);
+        return view('subcategorias.index', [ 'categorias'=> Categoria::all(), 'subcategorias'=> Subcategoria::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('subcategorias.create', [ 'subcategorias'=> Subcategoria::all()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SubcategoriaRequest $request)
     {
-        //
+        $subcategoria = Subcategoria::create($request->validated());
+        return back()->with('subcat_created', 'Subcategoria '.$subcategoria->nombre.'creada');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subcategoria  $subcategoria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subcategoria $subcategoria)
+    public function show($id)
     {
-        //
+        return view('subcategorias.show', ['subcategoria' => Subcategoria::findOrFail($id)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subcategoria  $subcategoria
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subcategoria $subcategoria)
+    public function update(SubcategoriaRequest $request, $id)
     {
-        //
+        $subcategoria = Subcategoria::findOrFail($id);
+        $subcategoria -> update($request->validated());
+        return back()->with('subcat_edited', 'Subcategoria ha sido editada');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subcategoria  $subcategoria
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subcategoria $subcategoria)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subcategoria  $subcategoria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subcategoria $subcategoria)
-    {
-        //
+        Subcategoria::destroy($id);
+        return back()->with('subcat_deleted', 'La subcategoria ha sido eliminada');
     }
 }

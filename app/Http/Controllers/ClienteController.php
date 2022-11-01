@@ -48,7 +48,7 @@ class ClienteController extends Controller
 
     public function destroy($id)
     {
-        $cliente = Cliente::destroy($id);
+        Cliente::destroy($id);
         return back()-> with('cliente_eliminado', 'El cliente ha sido eliminado');
     }
 }

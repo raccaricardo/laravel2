@@ -47,8 +47,8 @@
                                 Clientes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{route('categorias.index')}}">Listado</a></li>
-                                <li><a class="dropdown-item" href="{{route('categorias.create')}}">Agregar cliente</a></li>
+                                <li><a class="dropdown-item" href="{{route('clientes.index')}}">Listado</a></li>
+                                <li><a class="dropdown-item" href="{{route('clientes.create')}}">Agregar cliente</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

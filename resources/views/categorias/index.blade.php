@@ -23,6 +23,22 @@
     </div>
     @endif
 
+    @if(Session::has('cat_created'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('cat_created')}}
+    </div>
+    @endif
+    @if(Session::has('cat_edited'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('cat_edited')}}
+    </div>
+    @endif
+    @if(Session::has('cat_deleted'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('cat_deleted')}}
+    </div>
+    @endif
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mt-3 mb-2" data-bs-toggle="modal" data-bs-target="#modalCrear">
         Agregar nueva Categoria

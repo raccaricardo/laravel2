@@ -1,12 +1,27 @@
 @extends('layouts.template')
-@section('title', 'Listado categorias')
+@section('title', 'Listado subcategorias')
 @section('content')
 
+@if(Session::has('subcat_created'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('subcat_created')}}
+    </div>
+@endif
+@if(Session::has('subcat_edited'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('subcat_edited')}}
+    </div>
+@endif
+@if(Session::has('subcat_deleted'))
+    <div class="alert alert-sucess bg-success">
+        {{Session::get('subcat_deleted')}}
+    </div>
+@endif
 
 <div class="container-fluid">
 
     <h1 class="h3 pt-5 fw-bold">
-        Listado de Categorias
+        Listado de Subcategorias
     </h1>
 
     <!-- Manejo errores formulario -->
@@ -54,8 +69,20 @@
                     <form action="{{route('subcategorias.store')}}" method='post'>
                         @csrf
                         <div class="form-group mt-1">
+                            <select name="categoria" id="select_categorias" class="form-select @error('categoria') is-invalid @enderror">
+                                @foreach($categorias as $categoria)
+                                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                @endforeach
+                            </select>
+                            @error('categoria')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Seleccione una subcategoria
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
                             <label for="input_name">Nombre</label>
-                            <input autofocus type="text" class="form-control" id="input_name" name="nombre" aria-describedby="name" placeholder="Nueva Categoria">
+                            <input autofocus type="text" class="form-control" id="input_name" name="nombre" aria-describedby="name" placeholder="Nombre de la subcategoria">
                             @error('nombre')
                             <div id="validationServerNameFeedback" class="invalid-feedback">
                                 Verifique nuevamente el nombre
@@ -122,15 +149,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categorias as $item)
+                @foreach ($subcategorias as $item)
                 <tr>
                     <td scope='row'>{{ $item->id }} </td>
+                    <td>{{ $item->categoria }} </td>
                     <td>{{ $item->nombre }} </td>
                     <td>{{ $item->descripcion }} </td>
                     <td>{{ $item->imagen }} </td>
                     <td>
-                        <a href="{{route('categorias.show', ['id'=>$item->id])}}" class='btn btn-primary w-75 mb-1'>Editar</a>
-                        <form action="{{ route('categorias.delete',['id'=> $item->id]) }}" method='post'>
+                        <a href="{{route('subcategorias.show', ['id'=>$item->id])}}" class='btn btn-primary w-75 mb-1'>Editar</a>
+                        <form action="{{ route('subcategorias.delete',['id'=> $item->id]) }}" method='post'>
                             @csrf
                             @method('DELETE')
                             <button type='submit' class='btn btn-danger w-75'>Borrar</a>

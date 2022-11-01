@@ -13,9 +13,6 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::All();
-        if(!$categorias){
-            return redirect()->route('categorias.index');
-        }
         return view('categorias.index', ['categorias' => $categorias ]);
     }
 
@@ -27,7 +24,7 @@ class CategoriaController extends Controller
     public function store(CategoriaRequest $request)
     {
         $categoria = Categoria::create($request->validated());
-        return redirect()->route('categorias.index');
+        return back()->with('cat_created', 'Categoria '.$categoria->nombre.' ha sido creada');
     }
  
     public function show($id)
@@ -41,12 +38,15 @@ class CategoriaController extends Controller
         $categoria = Categoria::findOrFail($id);
         $categoria->update($request->validated());
         return redirect()->route('categorias.show', ['id' => $id]);
+        return back()->with('cat_edited', 'Categoria '.$categoria->nombre.' ha sido editada');
+
     }
 
   
     public function destroy($id)
     {
-        Categoria::destroy($id);
-        return redirect()->route('categorias.index');
+        $categoria = Categoria::destroy($id);
+        return back()->with('cat_deleted', 'Categoria ha sido ELIMINADA');
+
     }
 }

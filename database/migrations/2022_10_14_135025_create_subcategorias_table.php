@@ -12,7 +12,6 @@ return new class extends Migration
         Schema::create('subcategorias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('categoria')->constrained('categorias')->onDelete('restrict');
-            $table->foreignId('condicion_fiscal')->constrained('iva')->onDelete('restrict');
             $table->string('nombre', 100)->unique();
             $table->mediumText('descripcion')->nullable();
             $table->string('imagen')->nullable();
