@@ -20,7 +20,7 @@ class ClienteFactory extends Factory
             'direccion' => $this->faker-> streetAddress,
             'localidad' => $this->faker-> numberBetween(1,7),
             'telefono' => $this->faker-> phoneNumber,
-            'email' => $this->faker-> freeEmail,
+            'email' => $this->faker->unique()-> freeEmail,
             'email_secundario' => $this->faker-> email,
             'dni' => $this->faker->randomNumber(8, true),
             'razon_social'=>$this->faker->company,
