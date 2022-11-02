@@ -20,7 +20,7 @@ Route::controller(ClienteController::class)->group(function () {
     //methods form->name(''clientes.')s
     Route::patch('clientes/{id}', 'update')->name('clientes.update');
     Route::post('clientes', 'store')->name('clientes.store');
-    Route::delete('clientes/{id}', 'destroy')->name('clientes.destroy');
+    Route::delete('clientes/{id}', 'destroy')->name('clientes.delete');
 });
 Route::controller(ProveedorController::class)->group(function () {
     Route::get('proveedores', 'index')->name('proveedores.index');
@@ -57,6 +57,11 @@ Route::controller(SubcategoriaController::class)->group(function () {
 
 Route::controller(ProductoController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
+    
+    //methods forms
+    
+    Route::post('productos', 'store')->name('productos.store');
+
  });
 
 Route::controller(FabricanteController::class)->group(function () {

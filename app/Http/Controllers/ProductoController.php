@@ -10,8 +10,7 @@ class ProductoController extends Controller
 
     public function index()
     {
-        return "INDEX PRODUCTO";
-        // return view('productos.index', ['productos'=> Producto::all()]);
+        return view('productos.index', ['productos'=> Producto::all()]);
     }
 
     public function create()
@@ -21,7 +20,7 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return "store";
     }
 
     public function show(Producto $producto)

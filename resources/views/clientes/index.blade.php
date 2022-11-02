@@ -10,7 +10,7 @@
         </h1>
 
         <a href="{{ route('clientes.create') }}" class='btn btn-primary mt-5 mb-2 focus'>Anadir nuevo cliente</a>
-        @livewire('clientes-index', ["localidades"=> $localidades])
+        @livewire('clientes-index', ["localidades"=> $localidades, "clientes"=> $clientes])
 
     </div>
 

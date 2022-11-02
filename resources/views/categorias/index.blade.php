@@ -22,7 +22,7 @@
         </ul>
     </div>
     @endif
-
+    <!--Fin manejo de errores-->
     @if(Session::has('cat_created'))
     <div class="alert alert-sucess bg-success">
         {{Session::get('cat_created')}}
@@ -83,28 +83,7 @@
                             <input type="text" class="form-control" id="input_desc" name="descripcion" aria-describedby="descripcion" placeholder="Descripcion">
                         </div>
 
-                        <!-- 
-                                <label for="input_imagen">Imagen</label>
-                                <div class="input-group mt-1">
-                                <input type="file" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="input_file" aria-describedby="inputGroupFileAddon" aria-label="Subir">
-                                <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir Imagen</button>
-                                @error('imagen')
-                                    <div id="validationServerImagenFeedback" class="invalid-feedback">
-                                            Formato no valido(jpg, pgn, webp) o demasiado grande(debe ser menor a 5mb)
-                                    </div>
-                                @enderror
-                                </div> 
-                                <div class="form-group mt-1">
-                                    <label for="input_imagen">Imagen</label>
-                                    <input type="file" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="input_file" aria-describedby="inputGroupFileAddon" aria-label="Subir">
-                                    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir Imagen</button>
-                                    @error('imagen')
-                                        <div id="validationServerImagenFeedback" class="invalid-feedback">
-                                            Formato no valido(jpg, pgn, webp) o demasiado grande(debe ser menor a 5mb)
-                                        </div>
-                                    @enderror
-                                </div>
-                        -->
+           
                         <div class="form-group mt-1">
                             <label for="input_imagen">Imagen</label>
                             <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="input_file" aria-describedby="inputGroupFileAddon" aria-label="Subir" placeholder="Temporalmente url de texto">
@@ -123,6 +102,8 @@
             </div>
         </div>
     </div>
+    <!-- End Modal -->
+    
     <div class="table-responsive">
 
         <table class='table table-responsive table-dark table-striped captation-top'>

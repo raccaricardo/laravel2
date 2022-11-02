@@ -1,46 +1,59 @@
 <div>
+    <div class="row">
+        <div class="col-6 mb-2">
+            <input type="text" name="email" class="form-control" wire:model="q_email" placeholder="email" />
+            <input type="text" name="apellido" class="form-control mt-1" wire:model="q_apellido"
+                placeholder="apellido" />
+            <div class="form-group mt-1">
+                <select name="localidad" id="select_localidades"
+                    class="form-select @error('localidad') is-invalid @enderror">
+                        <option value="">ESTE SELECT ESTA FALLANDO</option>
 
-    <input type="text" class="form-control mb-2" name="email" placeholder="Apellido" wire:model="busqueda">
+                    @foreach ($localidades as $localidad)
+                        <option value="{{ $localidad->id }}">{{ $localidad->nombre }}</option>
+                    @endforeach
+                </select>
+                @error('localidad')
+                    <div id="validationServerNameFeedback" class="invalid-feedback">
+                        Seleccione una localidad
+                    </div>
+                @enderror
+            </div>
 
-    @if(Session::has('cliente_eliminado'))
-        <div class="alert alert-sucess bg-success" role="alert">
-            {{Session::get('cliente_eliminado')}}
         </div>
-    @endif
-    <div class="table-responsive mt-2">
+    </div>
 
-        <table class='table table-responsive table-dark table-striped captation-top'>
-            <caption>Listado de clientes</caption>
-            <thead class='table-dark'>
+
+    <div class="table-responsive">
+        <table class="table table-striped ">
+            <caption>Listado de usuarios</caption>
+
+            <thead class="table-dark">
                 <tr>
-                    <td scope='col'>id</td>
-                    <td scope='col'>Nombre</td>
-                    <td scope='col'>Apellido</td>
-                    <td scope='col'>Email</td>
-                    <td scope='col'>Localidad</td>
-                    <td></td>
-
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Localidad</th>
+                    <th scope="col" class="text-center">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($clientes as $item)
-                <tr>
-                    <td scope='row'>{{ $item->id }} </td>
-                    <td>{{ $item->nombre }} </td>
-                    <td>{{ $item->apellido }} </td>
-                    <td>{{ $item->email }} </td>
-                    <td></td>
-                    <td>
-                        <a href="/clientes/{{ $item->id }}" class='btn btn-primary w-100 mb-1'>Editar</a>
-                        <form action="{{ url('/clientes/' . $item->id) }}" method='post'>
-                            @csrf
-                            @method('DELETE')
-                            <button type='submit' class='btn btn-danger w-100'>Borrar</a>
-                        </form>
-                    </td>
-                </tr>
+                @foreach ($clientes as $cliente)
+                    <tr>
+                        <th scope="row">{{ $cliente->id }}</th>
+                        <td>{{ $cliente->nombre }}</td>
+                        <td>{{ $cliente->apellido }}</td>
+                        <td>{{ $cliente->email }}</td>
+                        <td>{{ $cliente->localidad }}</td>
+
+                        <td class="text-center">
+                            <a class="btn btn-primary" href="{{ route('clientes.show', $cliente->id) }}">Abrir</a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $clientes->links() }}
     </div>
 </div>

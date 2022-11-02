@@ -12,14 +12,21 @@ class ClientesIndex extends Component
 {
 
     use WithPagination;
-    public $busqueda = '';
     public $paginacion = 10;
-    protected $paginationTheme = 'bootstrap';
+    
     public $localidades;
+    public $q_apellido = '';
+    public $q_email = '';
+    public $q_localidad = "";
+
+    protected $paginationTheme = 'bootstrap';
+    
 
     protected $queryString = [
 
-        'busqueda' => ['except' => '', 'as' => 'b'],
+        'q_email' => ['except' => '', 'as' => 'e'],
+        'q_localidad' => ['except' => '', 'as' => 'l'],
+        'q_apellido'=> ['except' => '', 'as' => 'ap'],
         'paginacion' => ['except' => 10, 'as' => 'p'],
 
     ];
@@ -27,28 +34,29 @@ class ClientesIndex extends Component
 
     public function render()
     {
-        $clientes = $this->consultar();
-        $clientes = $clientes->paginate($this->paginacion);
-        if($clientes->currentPage() > $clientes->lastPage()){
+        $localidades = DB::table('localidades')->get();   
+        $cliente = $this->consultar();
+        $cliente = $cliente->paginate($this->paginacion);
+        if($cliente->currentPage() > $cliente->lastPage()){
             $this->resetPage();
-            $clientes = $this->consultar();
-            $clientes->paginate($this->paginacion);
+            $cliente = $this->consultar();
+            $cliente->paginate($this->paginacion);
         }
-        return view('livewire.clientes-index',['clientes' => $clientes]);
+        return view('livewire.clientes-index',['clientes' => $cliente, 'localidades'=> $localidades]);
     }
 
     private function consultar()
     {
-        $query = DB::table('clientes')
-        // ->join('localidades', 'clientes.localidad', '=', 'localidades.id')
-        ->select(['id', 'localidad', 'nombre', 'apellido', 'email', 'dni'])
-        ->orderBy('apellido')
-        ->get();
-
-        if($this->busqueda != ''){
-            $query->where('email', 'LIKE', '%'.$this->busqueda.'%');
+        $query = DB::table('clientes');
+        if($this->q_email != ''){
+            $query->where('email', 'LIKE', '%'.$this->q_email.'%');
         }
-
+        if($this->q_localidad!= ''){
+            $query->where('localidad', '=', ''.$this->q_localidad);
+        }
+        if($this->q_apellido!= ''){
+            $query->where('apellido', 'LIKE', '%'.$this->q_apellido.'%');
+        }
         
         return $query;
     }

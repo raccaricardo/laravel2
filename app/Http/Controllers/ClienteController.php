@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\ClienteRequest;
-
-use App\Models\Localidad;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 
@@ -15,13 +13,16 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $loc = DB::table('localidades')->get();
-        return view('clientes.index', ['localidades'=> $loc]);
+        $clientes = DB::table('clientes')
+        ->join('localidades', 'clientes.localidad', '=', 'localidades.id')
+        ->get();
+        $loca = DB::table('localidades')->get();
+        return view('clientes.index', ['clientes'=> $clientes, 'localidades'=>$loca] );
     }
 
     public function create()
     {
-        return view('clientes.create', ['localidades' => Localidad::all()]);
+        return view('clientes.create', ['localidades' => DB::table('localidades')->get()]);
     }
 
     public function store(ClienteRequest $request)
@@ -36,19 +37,19 @@ class ClienteController extends Controller
 
     public function show($id)
     {
-        return view('clientes.show', ['cliente' => Cliente::findOrFail($id), 'localidades' => Localidad::All()]);
+        return view('clientes.show', ['cliente' => Cliente::findOrFail($id), 'localidades' => DB::table('localidades')->get()]);
     }
     
     public function update(ClienteRequest $request, $id)
     {
         $cliente = Cliente::findOrFail($id);
         $cliente->update($request->validated());
-        return back()-> with('cliente_editado', 'El cliente ha sido editado');
+        return back()-> with('cliente_edited', 'El cliente ha sido editado');
     }
 
     public function destroy($id)
     {
         Cliente::destroy($id);
-        return back()-> with('cliente_eliminado', 'El cliente ha sido eliminado');
+        return back()-> with('cliente_deleted', 'El cliente ha sido eliminado');
     }
 }
