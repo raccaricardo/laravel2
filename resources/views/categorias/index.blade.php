@@ -27,6 +27,12 @@
     <div class="alert alert-sucess bg-success">
         {{Session::get('cat_created')}}
     </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{Session::get('cat_created')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
     @if(Session::has('cat_edited'))
     <div class="alert alert-sucess bg-success">
@@ -36,6 +42,12 @@
     @if(Session::has('cat_deleted'))
     <div class="alert alert-sucess bg-success">
         {{Session::get('cat_deleted')}}
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{Session::get('cat_deleted')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     @endif
 
@@ -83,10 +95,10 @@
                             <input type="text" class="form-control" id="input_desc" name="descripcion" aria-describedby="descripcion" placeholder="Descripcion">
                         </div>
 
-           
-                        <div class="form-group mt-1">
-                            <label for="input_imagen">Imagen</label>
-                            <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="input_file" aria-describedby="inputGroupFileAddon" aria-label="Subir" placeholder="Temporalmente url de texto">
+
+                        <div class="custom-file mt-1">
+                            <label class="custom-file-label" for="input_imagen">Seleccionar Imagen</label>
+                            <input type="file" name="imagen" lang="es" class="custom-file-input @error('imagen') is-invalid @enderror" id="input_imagen" aria-describedby="inputGroupFileAddon" aria-label="Subir" placeholder="Temporalmente url de texto">
                             @error('imagen')
                             <div id="validationServerImagenFeedback" class="invalid-feedback">
                                 Formato no valido(jpg, pgn, webp) o demasiado grande(debe ser menor a 5mb)
@@ -103,7 +115,7 @@
         </div>
     </div>
     <!-- End Modal -->
-    
+
     <div class="table-responsive">
 
         <table class='table table-responsive table-dark table-striped captation-top'>

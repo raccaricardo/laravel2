@@ -42,7 +42,6 @@ class ClientesIndex extends Component
             $cliente = $this->consultar();
             $cliente->paginate($this->paginacion);
         }
-        //$localidades = DB::table('localidades')->get();
         return view('livewire.clientes-index',['clientes' => $cliente, 'localidades'=> Localidad::all()]);
     }
 
