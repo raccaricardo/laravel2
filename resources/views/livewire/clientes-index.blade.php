@@ -1,6 +1,6 @@
 <div>
 
-{{-- dd($clientes) --}}
+
     <div class="row">
         <div class="col-6 mb-2">
             <input type="text" name="email" class="form-control" wire:model="q_email" placeholder="email" />
@@ -42,6 +42,9 @@
 
                         <td class="text-center">
                             <a class="btn btn-primary" href="{{ route('clientes.show', $cliente->id) }}">Abrir</a>
+                        </td>
+                        <td class="text-center">
+
                         </td>
                     </tr>
                     @empty
