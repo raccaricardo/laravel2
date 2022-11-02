@@ -17,10 +17,13 @@
 @endif
 <form action="{{ route('clientes.store') }}" method='post' class="pt-5">
     @csrf
- 
+
     <x-cliente-form :localidades=$localidades titulo='' ></x-cliente-form>
     <button type="submit" class="btn btn-primary mt-3">Guardar nuevo cliente</button>
 
 </form>
 
 @endsection
+
+
+

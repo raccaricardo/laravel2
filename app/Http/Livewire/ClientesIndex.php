@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\DB;
 //use App\Models\Cliente;
+use App\Models\Localidad;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,14 +14,14 @@ class ClientesIndex extends Component
 
     use WithPagination;
     public $paginacion = 10;
-    
-    public $localidades;
+
     public $q_apellido = '';
     public $q_email = '';
     public $q_localidad = "";
 
+
     protected $paginationTheme = 'bootstrap';
-    
+
 
     protected $queryString = [
 
@@ -34,7 +35,6 @@ class ClientesIndex extends Component
 
     public function render()
     {
-        $localidades = DB::table('localidades')->get();   
         $cliente = $this->consultar();
         $cliente = $cliente->paginate($this->paginacion);
         if($cliente->currentPage() > $cliente->lastPage()){
@@ -42,22 +42,25 @@ class ClientesIndex extends Component
             $cliente = $this->consultar();
             $cliente->paginate($this->paginacion);
         }
-        return view('livewire.clientes-index',['clientes' => $cliente, 'localidades'=> $localidades]);
+        //$localidades = DB::table('localidades')->get();
+        return view('livewire.clientes-index',['clientes' => $cliente, 'localidades'=> Localidad::all()]);
     }
 
     private function consultar()
     {
-        $query = DB::table('clientes');
+        $query = DB::table('clientes')
+            ->join('localidades','clientes.localidad','=','localidades.id')
+            ->select('clientes.*','localidades.nombre as localidadNombre');
         if($this->q_email != ''){
-            $query->where('email', 'LIKE', '%'.$this->q_email.'%');
+            $query->where('clientes.email', 'LIKE', '%'.$this->q_email.'%');
         }
         if($this->q_localidad!= ''){
-            $query->where('localidad', '=', ''.$this->q_localidad);
+            $query->where('clientes.localidad', '=', $this->q_localidad);
         }
         if($this->q_apellido!= ''){
-            $query->where('apellido', 'LIKE', '%'.$this->q_apellido.'%');
+            $query->where('clientes.apellido', 'LIKE', '%'.$this->q_apellido.'%');
         }
-        
+
         return $query;
     }
 }

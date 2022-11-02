@@ -1,25 +1,18 @@
 <div>
+
+
     <div class="row">
         <div class="col-6 mb-2">
             <input type="text" name="email" class="form-control" wire:model="q_email" placeholder="email" />
             <input type="text" name="apellido" class="form-control mt-1" wire:model="q_apellido"
                 placeholder="apellido" />
-            <div class="form-group mt-1">
-                <select name="localidad" id="select_localidades"
-                    class="form-select @error('localidad') is-invalid @enderror">
-                        <option value="">ESTE SELECT ESTA FALLANDO</option>
+            <select class="form-select" id="localidad" name="localidad" wire:model="q_localidad">
+                @forelse( $localidades as $item)
+                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                @empty
 
-                    @foreach ($localidades as $localidad)
-                        <option value="{{ $localidad->id }}">{{ $localidad->nombre }}</option>
-                    @endforeach
-                </select>
-                @error('localidad')
-                    <div id="validationServerNameFeedback" class="invalid-feedback">
-                        Seleccione una localidad
-                    </div>
-                @enderror
-            </div>
-
+                @endforelse
+            </select>
         </div>
     </div>
 
@@ -39,19 +32,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($clientes as $cliente)
+                @forelse ($clientes as $cliente)
                     <tr>
                         <th scope="row">{{ $cliente->id }}</th>
                         <td>{{ $cliente->nombre }}</td>
                         <td>{{ $cliente->apellido }}</td>
                         <td>{{ $cliente->email }}</td>
-                        <td>{{ $cliente->localidad }}</td>
+                        <td>{{ $cliente->localidadNombre }}</td>
 
                         <td class="text-center">
                             <a class="btn btn-primary" href="{{ route('clientes.show', $cliente->id) }}">Abrir</a>
                         </td>
+                        <td class="text-center">
+
+                        </td>
                     </tr>
-                @endforeach
+                    @empty
+                @endforelse
             </tbody>
         </table>
         {{ $clientes->links() }}
