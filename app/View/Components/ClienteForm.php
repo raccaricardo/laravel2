@@ -16,7 +16,7 @@ class ClienteForm extends Component
         if(is_null($cliente)){
             $cliente = Cliente::make([]);
          }
- 
+
          $this->localidades=$localidades;
          $this->cliente=$cliente;
          $this->titulo = $titulo;
