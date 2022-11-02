@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
 
     public function index()
     {
-        return view('productos.index', ['productos'=> Producto::all()]);
+        return view('productos.index', ['productos'=> DB::table('productos'), 'categorias'=> DB::table('categorias'), 'subcategorias'=> DB::table('subcategorias')]);
     }
 
     public function create()

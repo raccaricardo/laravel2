@@ -23,16 +23,20 @@ class CategoriaController extends Controller
 
     public function store(CategoriaRequest $request)
     {
-        $categoria = Categoria::create($request->validated());
+        $categoria= Categoria::create($request->validated());
+        // $categoria = new Categoria();
+        // $filePath = $request->file('imagen')->storeAs('imagen', time().'-'.$request->file('imagen')->getClientOriginalName(), 'public');
+        // $categoria->imagen = $filePath;
+        // $categoria->save();
         return back()->with('cat_created', 'Categoria '.$categoria->nombre.' ha sido creada');
     }
- 
+
     public function show($id)
     {
         return view('categorias.show', ['categoria'=> Categoria::findOrFail($id)]);
 
-    } 
- 
+    }
+
     public function update(CategoriaRequest $request, $id)
     {
         $categoria = Categoria::findOrFail($id);
@@ -42,7 +46,7 @@ class CategoriaController extends Controller
 
     }
 
-  
+
     public function destroy($id)
     {
         $categoria = Categoria::destroy($id);
