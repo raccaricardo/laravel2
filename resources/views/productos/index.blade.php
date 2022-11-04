@@ -39,8 +39,6 @@
             </div>
         @endif
 
-
-
         @livewire('productos.productos-index')
 
     </div>

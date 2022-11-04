@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubcategoriaRequest;
 use App\Models\Categoria;
 use App\Models\Subcategoria;
+use Nette\Utils\Image;
 
 class SubcategoriaController extends Controller
 {
@@ -20,13 +21,29 @@ class SubcategoriaController extends Controller
 
     public function store(SubcategoriaRequest $request)
     {
-        $subcategoria = Subcategoria::create($request->validated());
+        $request->validated();
+        $subcategoria = new Subcategoria();
+        $subcategoria->categoria =  $request->input('categoria');
+        $subcategoria->nombre =  $request->input('nombre');
+        $subcategoria->descripcion =  $request->input('descripcion');
+        
+        if($request->hasFile('imagen')){
+
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+            $fileName= time().'.'.$extension;        
+            $file->move('uploads/subcategorias'.'/'. $fileName);
+            $resizedImage = Image::make(public_path('uploads/subcategorias'.'/'.$fileName))->save();
+            $subcategoria->imagen = public_path('uploads/subcategorias'.'/'. $fileName);
+        }            
+        $subcategoria->save();
+
         return back()->with('subcat_created', 'Subcategoria '.$subcategoria->nombre.'creada');
     }
 
     public function show($id)
     {
-        return view('subcategorias.show', ['subcategoria' => Subcategoria::findOrFail($id)]);
+        return view('subcategorias.show', ['categorias'=> Categoria::all(), 'subcategoria' => Subcategoria::findOrFail($id) ]);
     }
 
     public function update(SubcategoriaRequest $request, $id)

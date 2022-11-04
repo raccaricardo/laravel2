@@ -4,10 +4,8 @@
 @section('content')
 
 <div class="container-fluid">
-    <form action="" class="form-control">
-        <input type="text" class="form-controll" />
-        <input type="text" class="form-controll" />
-        <input type="text" class="form-controll" />
+    <form action="{{route('fabricante.store')}}" class="form-control">
+        <input type="text" name="nombre" class="form-controll" value="{{old('nombre')}}" />
 
 
     </form>
