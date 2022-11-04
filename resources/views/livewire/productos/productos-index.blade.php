@@ -1,4 +1,21 @@
 <div>
+    <!--Buscador / Filtro -->
+    <!-- <select model:wire="q_categoria" name="categoria" class="form-select" id="select_categorias">
+        @forelse($categorias as $categoria)
+        <option value="$categoria->id">{{ $categoria->nombre }}</option>
+        @empty
+        <option value="">No hay categorias creadas</option>
+        @endforelse
+    </select>
+    <select select name="subcategoria" class="form-select" id="select_categorias">
+        @forelse($subcategorias as $subcategoria)
+        <option value="$subcategoria->id">{{ $subcategoria->nombre }}</option>
+        @empty
+        <option value="">No hay subcategorias creadas</option>
+        @endforelse
+    </select> -->
+    <!--END Buscador / Filtro -->
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mt-3 mb-2" data-bs-toggle="modal" data-bs-target="#modalCrear">
         Agregar nuevo producto
@@ -9,7 +26,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdd">Agregar nueva Categoria</h5>
+                    <h5 class="modal-title" id="modalAdd">Agregar nuevo producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -17,7 +34,7 @@
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ins>
-                            <h4>No se pudo crear categoria</h4>
+                            <h4>No se pudo crear producto</h4>
                         </ins>
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -26,12 +43,90 @@
                         </ul>
                     </div>
                     @endif
-
+                    <!-- Inicio form crear producto -->
                     <form action="{{ route('productos.store') }}" method='post'>
                         @csrf
-                        <x-producto-form />
-                        <button type="submit" class="btn btn-primary mt-3">Crear Categoria</button>
+                        <select wire:model="f_categoria" name="categoria" class="form-select" id="select_categorias">
+                            @forelse($categorias as $categoria)
+                            <option value="{{$categoria->id}}">{{ $categoria->nombre }}</option>
+                            @empty
+                            <option value="">No hay categorias creadas</option>
+                            @endforelse
+                        </select>
+                        <select name="subcategoria" class="form-select" id="select_categorias">
+                            @forelse($subcategorias as $subcategoria)
+                            <option value="{{$subcategoria->id}}">{{ $subcategoria->nombre }}</option>
+                            @empty
+                            <option value="">No hay subcategorias creadas</option>
+                            @endforelse
+                        </select>
+                        <div class="form-group mt-1">
+                            <label for="input_name">Nombre</label>
+                            <input autofocus type="text" class="form-control @error('nombre')is-invalid @enderror" id="input_name" name="nombre" aria-describedby="nombre" placeholder="Ej: Teclado hyperx" value="{{old('nombre', $producto->nombre)}}">
+                            @error('nombre')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Verifique nuevamente el nombre
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_altern_name">Nombre Alternativo</label>
+                            <input autofocus type="text" id="input_altern_name" name="nombre_alternativo" aria-describedby="name" class="form-control @error('nombre_alternativo')is-invalid @enderror" placeholder="Nombre alternativo" value="{{old('nombre_alternativo', $producto->nombre_alternativo)}}">
+                            @error('nombre_alternativo')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Este campo es incorrecto
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_desc">Descripcion</label>
+                            <input type="text" class="form-control @error('descipcion')is-invalid @enderror" id="input_desc" name="descripcion" aria-describedby="descripcion" placeholder="Descripcion" value="{{old('descripcion', $producto->descripcion)}}">
+                            @error('descripcion')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Este campo es incorrecto
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_cost">Costo</label>
+                            <input type="text" class="form-control @error('costo')is-invalid @enderror" id="input_cost" name="costo" aria-describedby="costo" placeholder="Costo" value="{{old('costo', $producto->costo)}}">
+                            @error('costo')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Este campo es incorrecto
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_iva">IVA</label>
+                            <input type="text" class="form-control @error('iva')is-invalid @enderror" id="input_iva" name="iva" aria-describedby="stock" placeholder="Ej: 10.5" value="{{old('iva', $producto->iva)}}">
+                            @error('iva')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Este campo es incorrecto
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_stock">Stock</label>
+                            <input type="text" class="form-control @error('stock')is-invalid @enderror" id="input_stock" name="stock" aria-describedby="stock" placeholder="Stock" value="{{old('stock', $producto->stock)}}">
+                            @error('stock')
+                            <div id="validationServerNameFeedback" class="invalid-feedback">
+                                Este campo es incorrecto
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="input_imagen">Imagen</label>
+                            <input type="file" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="input_imagen" aria-describedby="inputGroupFileAddon" aria-label="Subir" placeholder="Temporalmente url de texto" value="{{old('imagen', $producto->imagen)}}">
+                            @error('imagen')
+                            <div id="validationServerImagenFeedback" class="invalid-feedback">
+                                Formato no valido(jpg, pgn, webp) o demasiado grande(debe ser menor a 5mb)
+                            </div>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Crear Producto</button>
                     </form>
+                    <!--Fin form crear producto-->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
@@ -40,5 +135,42 @@
         </div>
     </div>
     <!-- End modal-content -->
-    
+    <div class="table-responsive">
+        <table class="table table-striped ">
+            <caption>Listado de usuarios</caption>
+
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Costo</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col" class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($productos as $producto)
+                    <tr>
+                        <th scope="row">{{ $producto->id }}</th>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->costo }}</td>
+                        <td>{{ $producto->stock }}</td>
+                        <td>{{ $producto->imagen }}</td>
+
+                        <td class="text-center">
+                            <a class="btn btn-primary" href="{{ route('productos.show', $producto->id) }}">Abrir</a>
+                        </td>
+                        <td class="text-center">
+
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td>No se encontraron productos</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+        {{ $clientes->links() }}
+    </div>
+
 </div>
