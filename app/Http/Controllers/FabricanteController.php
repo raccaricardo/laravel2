@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Fabricante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FabricanteController extends Controller
 {
 
     public function index()
     {
-
-        return view('fabricantes.index');
+        $fabricantes = DB::table('fabricantes')->get();
+        return view('fabricantes.index', ['fabricantes' => $fabricantes]);
     }
 
 

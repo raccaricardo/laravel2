@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProductosIndex extends Component
-
+{ 
     public $categorias, $subcategorias;
     public $q_categoria;
     public $q_subcategoria;

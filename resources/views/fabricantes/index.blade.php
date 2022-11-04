@@ -22,7 +22,7 @@
     <div class="container-fluid">
 
         <h1 class="h3 pt-5 fw-bold">
-            Listado de Subcategorias
+            Listado de Fabricantes
         </h1>
 
         <!-- Manejo errores formulario -->
@@ -49,7 +49,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdd">Agregar nueva Subcategoria</h5>
+                        <h5 class="modal-title" id="modalAdd">Agregar nuevo fabricante</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -80,7 +80,7 @@
                                     </div>
                                 @enderror
                             </div>
-                             
+
                             <button type="submit" class="btn btn-primary mt-3">Crear Categoria</button>
                         </form>
                         <div class="modal-footer">
@@ -99,6 +99,8 @@
                         <td scope='col'>ID</td>
                         <td>Nombre</td>
                         <td></td>
+                        <td></td>
+
 
                     </tr>
                 </thead>
@@ -143,7 +145,13 @@
                             </td>
                         </tr>
                         @empty
-                        <tr><td>No se encontraron fabricantes</td></tr>
+                        <tr><td>No se encontraron fabricantes</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
                     @endforelse
                 </tbody>
             </table>
