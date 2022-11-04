@@ -26,138 +26,74 @@
             font-family: 'Nunito', sans-serif;
             background-image: url("../../../resources/images/double-bubble-dark.webp");
         }
+
+        @media(max-width: 575.98px) {
+            sidebar{
+                z-index : 3;
+            }
+            main{
+                z-index : 1;
+            }
+        }
+
     </style>
 </head>
 
-<body class="container">
-
-    <header class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand d-inline-block w-25" href="{{ url('/') }}"><img src="../../images/logo.webp" class="img-thumbnail"></a>
-                </nav>
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">Mauri Computacion</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Inicio</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Clientes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('clientes.index') }}">Listado</a></li>
-                                <li><a class="dropdown-item" href="{{ route('clientes.create') }}">Agregar cliente</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Proveedores
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <li><a class="dropdown-item" href="{{ route('proveedores.index') }}">Listado</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('proveedores.create') }}">Agregar nuevo
-                                        Proveedor</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Productos
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('productos.index') }}">Listado de
-                                        productos</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('categorias.index') }}">Listado
-                                        Categorias</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav> -->
-        <button class="btn btn-primary mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa-solid fa-bars"></i></button>
-
-        <div class="offcanvas offcanvas-start show w-25" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-            <div class="offcanvas-header">
-                <!-- <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Titulo</h5> -->
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
+<body class="container-fluid">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand d-inline-block w-25" href="{{ url('/') }}"><img src="../../images/logo.webp" class="img-thumbnail"></a>
+            <button type="button" id="btn-menu" class="d-block d-sm-none" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        </nav>
 
 
-
-
-
-                        <div class="accordion-body">
-                            <!--List group-->
-                            <div class="list-group">
-                                <a href="{{route('clientes.index')}}" class="list-group-item list-group-item-action active" aria-current="true">
-                                <i class="fa-solid fa-user me-3"></i> CLIENTES
-                                </a>
-                                <a href="{{route('productos.index')}}" class="list-group-item list-group-item-action active mt-2" aria-current="true">
-                                <i class="fa-solid fa-laptop me-3"></i> PRODUCTOS
-                                </a>
-                                <a href="{{route('proveedores.index')}}" class="list-group-item list-group-item-action active mt-2" aria-current="true">
-                                <i class="fa-solid fa-handshake me-3"></i> PROVEEDORES
-                                </a>
-                                <a href="{{route('fabricantes.index')}}" class="list-group-item list-group-item-action active mt-2" aria-current="true">
-                                <i class="fa-solid fa-user me-3"></i>  FABRICANTES
-                                </a>
-                                <a href="{{route('categorias.index')}}" class="list-group-item list-group-item-action active mt-2" aria-current="true">
-                                   <i class="fa-solid fa-square-minus me-3"></i> CATEGORIAS
-                                </a>
-                                <a href="{{route('subcategorias.index')}}" class="list-group-item list-group-item-action active mt-2" aria-current="true">
-                                   <i class="fa-solid fa-square-minus me-3"></i> SUBCATEGORIAS
-                                </a>
-
-                            </div>
-                            <!--END List group-->
-                        </div>
-
-
-                <!-- End body offcanvas-->
-            </div>
-        </div>
     </header>
-    @yield('content')
+
+    <div class="row m-0 vh-100">
+        <sidebar id="sideMenu" class="col-6 col-sm-2 col-xl-2 m-0 vh-100 d-block bg-dark">
+
+            <!--List group-->
+            <div class="list-group align-items-center">
+                <a href="{{route('clientes.index')}}" class="list-group-item list-group-item-action active mt-4 " aria-current="true">
+                    <i class="fa-solid fa-user "></i> <span class="ms-3 d-sm-none d-md-block" >CLIENTES</span>
+                </a>
+                <a href="{{route('productos.index')}}" class="list-group-item list-group-item-action active mt-4" aria-current="true">
+                    <i class="fa-solid fa-laptop "></i> <span class="ms-3 d-sm-none d-md-block">PRODUCTOS</span>
+                </a>
+                <a href="{{route('proveedores.index')}}" class="list-group-item list-group-item-action active mt-4" aria-current="true">
+                    <i class="fa-solid fa-handshake "></i> <span class="ms-3 d-sm-none d-md-block">PROVEEDORES</span>
+                </a>
+                <a href="{{route('fabricantes.index')}}" class="list-group-item list-group-item-action active mt-4" aria-current="true">
+                    <i class="fa-solid fa-user "></i> <span class="ms-3 d-sm-none d-md-block">FABRICANTES</span>
+                </a>
+                <a href="{{route('categorias.index')}}" class="list-group-item list-group-item-action active mt-4" aria-current="true">
+                    <i class="fa-solid fa-square-minus "></i> <span class="ms-3 d-sm-none d-md-block">CATEGORIAS</span>
+                </a>
+                <a href="{{route('subcategorias.index')}}" class="list-group-item list-group-item-action active mt-4" aria-current="true">
+                    <i class="fa-solid fa-square-minus "></i> <span class="ms-3 d-sm-none d-md-block">SUBCATEGORIAS</span>
+                </a>
+
+            </div>
+            <!--END List group-->
+        </sidebar>
+        <main id="mainContent" class="col-6 col-sm-10 col-xl-10 m-0 vh-100">
+            @yield('content')
+
+        </main>
+    </div>
+
 
 
     @livewireScripts
     @yield('scripts')
+    <script>
+        function toggleMenu(){
+            const element = document.getElementById('sideMenu');
+            element.classList.toggle('d-none');
+            document.getElementById('mainContent').classList.toggle('col-6');
+
+        }
+    </script>
 </body>
 
 </html>
