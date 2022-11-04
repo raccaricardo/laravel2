@@ -38,7 +38,7 @@
                 {{ Session::get('cat_deleted') }}
             </div>
         @endif
-        
+
         @livewire('productos.productos-index')
 
     </div>

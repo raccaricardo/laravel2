@@ -1,4 +1,21 @@
 <div>
+    <!--Buscador / Filtro -->
+    <!-- <select model:wire="q_categoria" name="categoria" class="form-select" id="select_categorias">
+        @forelse($categorias as $categoria)
+        <option value="$categoria->id">{{ $categoria->nombre }}</option>
+        @empty
+        <option value="">No hay categorias creadas</option>
+        @endforelse
+    </select>
+    <select select name="subcategoria" class="form-select" id="select_categorias">
+        @forelse($subcategorias as $subcategoria)
+        <option value="$subcategoria->id">{{ $subcategoria->nombre }}</option>
+        @empty
+        <option value="">No hay subcategorias creadas</option>
+        @endforelse
+    </select> -->
+    <!--END Buscador / Filtro -->
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mt-3 mb-2" data-bs-toggle="modal" data-bs-target="#modalCrear">
         Agregar nuevo producto
@@ -39,12 +56,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalAdd">Agregar nueva Categoria</h5>
+                    <h5 class="modal-title" id="modalAdd">Agregar nuevo producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Manejo errores formulario -->
                     @if ($errors->any())
+ 
                         <div class="alert alert-danger">
                             <ins>
                                 <h4>No se pudo crear categoria</h4>
@@ -73,10 +91,12 @@
                                 <option value="$subcategoria->id">{{ $subcategoria->nombre }}</option>
                             @empty
                                 <option value="">No hay subcategorias creadas</option>
+
                             @endforelse
                         </select>
                         <div class="form-group mt-1">
                             <label for="input_name">Nombre</label>
+
                             <input autofocus type="text" class="form-control @error('nombre')is-invalid @enderror"
                                 id="input_name" name="nombre" aria-describedby="nombre"
                                 placeholder="Ej: Teclado hyperx" value="{{ old('nombre', $producto->nombre) }}">
@@ -101,7 +121,7 @@
                         </div>
                         <div class="form-group mt-1">
                             <label for="input_desc">Descripcion</label>
-                            <input type="text" class="form-control @error('descipcion')is-invalid @enderror"
+                            <input type="text" class="form-control @error('descripcion')is-invalid @enderror"
                                 id="input_desc" name="descripcion" aria-describedby="descripcion"
                                 placeholder="Descripcion" value="{{ old('descripcion', $producto->descripcion) }}">
                             @error('descripcion')
@@ -123,6 +143,7 @@
                         </div>
                         <div class="form-group mt-1">
                             <label for="input_iva">IVA</label>
+ 
                             <input type="text" class="form-control @error('iva')is-invalid @enderror" id="input_iva"
                                 name="iva" aria-describedby="stock" placeholder="Ej: 10.5">
                             @error('iva')
@@ -159,7 +180,7 @@
                     </form>
                     <!-- END post / create form-->
 
-                    <div class="modal-footer">
+                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
@@ -167,5 +188,44 @@
         </div>
     </div>
     <!-- End modal-content -->
+ 
+    <div class="table-responsive">
+        <table class="table table-striped ">
+            <caption>Listado de usuarios</caption>
+
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Costo</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col" class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($productos as $producto)
+                    <tr>
+                        <th scope="row">{{ $producto->id }}</th>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->costo }}</td>
+                        <td>{{ $producto->stock }}</td>
+                        <td>{{ $producto->imagen }}</td>
+
+                        <td class="text-center">
+                            <a class="btn btn-primary" href="{{ route('productos.show', $producto->id) }}">Abrir</a>
+                        </td>
+                        <td class="text-center">
+
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td>No se encontraron productos</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+        {{ $clientes->links() }}
+    </div>
+ 
 
 </div>

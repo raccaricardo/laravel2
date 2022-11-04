@@ -13,7 +13,7 @@
 
     @endif
 
-    
+
     <div class="container-fluid">
         <h1 class="h3 pt-5 fw-bold">
             Listado de Proveedores
@@ -35,8 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (isset($proveedores))
-                        @foreach ($proveedores as $item)
+                         @forelse ($proveedores as $item)
                             <tr>
                                 <td scope='row'>
                                     {{ $item->id }} </td>
@@ -55,9 +54,10 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
-                    @endif
-                </tbody>
+                        @empty
+                        <tr><td>No se encontraron proveedores</td></tr>
+                        @endforelse
+                 </tbody>
             </table>
         </div>
     </div>
