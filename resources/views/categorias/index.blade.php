@@ -94,8 +94,6 @@
                             <label for="input_desc">Descripcion</label>
                             <input type="text" class="form-control" id="input_desc" name="descripcion" aria-describedby="descripcion" placeholder="Descripcion">
                         </div>
-
-
                         <div class="custom-file mt-1">
                             <label class="custom-file-label" for="input_imagen">Seleccionar Imagen</label>
                             <input type="file" name="imagen" lang="es" class="custom-file-input @error('imagen') is-invalid @enderror" id="input_imagen" aria-describedby="inputGroupFileAddon" aria-label="Subir" placeholder="Temporalmente url de texto">
@@ -136,7 +134,7 @@
                     <td scope='row'>{{ $item->id }} </td>
                     <td>{{ $item->nombre }} </td>
                     <td>{{ $item->descripcion }} </td>
-                    <td>{{ $item->imagen }} </td>
+                    <td> <img src="{{$item->imagen}}" class="img-fluid" alt=""/></td>
                     <td>
                         <a href="{{route('categorias.show', ['id'=>$item->id])}}" class='btn btn-primary w-75 mb-1'>Editar</a>
                         <form action="{{ route('categorias.delete',['id'=> $item->id]) }}" method='post'>

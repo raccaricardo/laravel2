@@ -10,20 +10,33 @@
         </h1>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mt-3 mb-2" data-bs-toggle="modal" data-bs-target="#modalCrear">
-            Agregar nuevo producto
+            Agregar nuevo cliente
         </button>
+        <!-- Manejo errores formulario -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ins>
+                    <h4>No se pudo crear categoria</h4>
+                </ins>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>a
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         @if (Session::has('cliente_created'))
             <div class="alert alert-sucess bg-success">
                 {{ Session::get('cliente_created') }}
             </div>
         @endif
         @if (Session::has('cliente_edited'))
-            <div class="alert alert-sucess bg-success">
+            <div class="alert alert-secondary bg-success">
                 {{ Session::get('cliente_edited') }}
             </div>
         @endif
         @if (Session::has('cliente_deleted'))
-            <div class="alert alert-sucess bg-success">
+            <div class="alert alert-danger bg-alert">
                 {{ Session::get('cliente_deleted') }}
             </div>
         @endif
@@ -36,19 +49,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Manejo errores formulario -->
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ins>
-                                    <h4>No se pudo crear categoria</h4>
-                                </ins>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>a
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <form action="{{ route('clientes.store') }}" method='post'>
                             <x-cliente-form :localidades=$localidades titulo='' />
                             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -62,7 +62,8 @@
         </div>
         <!-- End Modal -->
 
-        @livewire('clientes-index')
+        @livewire('clientes.clientes-index')
+
 
     </div>
 
